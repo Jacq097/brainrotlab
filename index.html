@@ -187,84 +187,149 @@
     </style>
 
 <style id="phone-index-final-fix">
-/* Final phone-only correction for the home page.
-   Targets narrow portrait phones even when the browser reports a wide CSS viewport. */
-@media screen and (max-width: 699px), screen and (pointer: coarse) and (orientation: portrait) and (max-aspect-ratio: 0.7) {
+/* Universal mobile responsive correction for the home page.
+   Uses the actual viewport width instead of the old fixed 430px canvas.
+   No scripts, text, assets, or interactions are changed. */
+@media screen and (max-width: 699px) {
     html, body {
         width: 100%;
         min-width: 0;
+        max-width: 100%;
         overflow-x: hidden;
     }
 
     body > main[class*="max-w-[430px]"] {
         width: 100% !important;
-        max-width: 430px !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+
+    /* Navigation scales with the phone instead of keeping tablet-sized pills. */
+    body > main[class*="max-w-[430px]"] > nav {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        gap: clamp(5px, 2vw, 10px) !important;
+        padding-left: clamp(7px, 2.5vw, 14px) !important;
+        padding-right: clamp(7px, 2.5vw, 14px) !important;
+        padding-top: clamp(14px, 4vw, 24px) !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > nav .nav-pill {
+        flex: 1 1 0 !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        padding: clamp(6px, 1.8vw, 9px) clamp(5px, 2vw, 12px) !important;
+        font-size: clamp(9px, 2.8vw, 12px) !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Title: width follows the real viewport, so it cannot spill off narrow phones. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        margin-top: clamp(9rem, 39vh, 15rem) !important;
+        padding-left: clamp(4px, 2vw, 10px) !important;
+        padding-right: clamp(4px, 2vw, 10px) !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] > div {
+        width: min(92vw, 380px) !important;
+        max-width: min(92vw, 380px) !important;
         margin-left: auto !important;
         margin-right: auto !important;
+        box-sizing: border-box !important;
     }
 
-    /* Restore compact phone navigation. */
-    body > main[class*="max-w-[430px]"] > nav {
-        gap: 8px !important;
-        padding-left: 12px !important;
-        padding-right: 12px !important;
-        padding-top: 24px !important;
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] img[alt=""]:first-of-type {
+        width: 100% !important;
+        max-width: 100% !important;
     }
-    body > main[class*="max-w-[430px]"] > nav .nav-pill {
-        flex: 0 1 auto !important;
-        width: auto !important;
+
+    /* Decorative characters scale with the title instead of staying fixed. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] img[alt=""] {
         max-width: none !important;
-        padding: 6px 12px !important;
-        padding-left: 16px !important;
-        font-size: 11px !important;
-        line-height: 1.25 !important;
-        white-space: nowrap !important;
+    }
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] img[src*="character 1"] {
+        width: clamp(48px, 18vw, 80px) !important;
+        left: clamp(18px, 7vw, 30px) !important;
+        top: clamp(-26px, -7vw, -18px) !important;
+    }
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] img[src*="kaca_pembesar"] {
+        width: clamp(38px, 13vw, 56px) !important;
+        height: auto !important;
+        right: clamp(-4px, -1vw, 0px) !important;
+        top: clamp(-24px, -6vw, -14px) !important;
     }
 
-    /* Keep the original compact title scale on phones. */
-    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] {
-        margin-top: 15rem !important;
+    /* Description stays inside the viewport on every phone width. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] {
+        width: min(94vw, 360px) !important;
+        max-width: min(94vw, 360px) !important;
+        margin-top: clamp(2px, 1vw, 6px) !important;
         padding-left: 4px !important;
         padding-right: 4px !important;
-    }
-    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] > div {
-        width: 90% !important;
-        max-width: 380px !important;
+        box-sizing: border-box !important;
     }
 
-    body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] {
-        width: 100% !important;
-        max-width: 360px !important;
-        margin-top: 4px !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-    }
     body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] p {
-        font-size: 12px !important;
+        max-width: 100% !important;
+        font-size: clamp(10px, 3.1vw, 13px) !important;
         line-height: 1.2 !important;
     }
 
-    /* Center START within the phone canvas, not the title artwork. */
-    body > main[class*="max-w-[430px]"] > section[aria-label="Start quiz"] {
-        width: 100% !important;
-        max-width: 430px !important;
-        margin-top: 5rem !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-        box-sizing: border-box !important;
+    body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] img[src*="tung-tung"] {
+        width: clamp(32px, 11vw, 48px) !important;
+        left: clamp(-2px, -1vw, 0px) !important;
     }
-    body > main[class*="max-w-[430px]"] > section[aria-label="Start quiz"] > a {
-        width: 60% !important;
-        max-width: 200px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
+    body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] img[src*="character 2"] {
+        width: clamp(30px, 10vw, 44px) !important;
+        right: clamp(-4px, -2vw, -1px) !important;
     }
 
-    /* Phone-specific character sizes, preserving their original positions. */
-    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] img[alt=""] {
+    /* START is centered in the actual viewport and scales smoothly. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="Start quiz"] {
+        width: 100% !important;
         max-width: none !important;
+        margin-top: clamp(3rem, 9vh, 5rem) !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Start quiz"] > a {
+        width: clamp(150px, 55vw, 200px) !important;
+        max-width: 200px !important;
+        padding-top: clamp(9px, 2.7vw, 12px) !important;
+        padding-bottom: clamp(9px, 2.7vw, 12px) !important;
+        font-size: clamp(16px, 5vw, 20px) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* Very narrow phones: give the title a little more breathing room. */
+@media screen and (max-width: 360px) {
+    body > main[class*="max-w-[430px]"] > nav .nav-pill {
+        padding-left: 3px !important;
+        padding-right: 3px !important;
+        font-size: 9px !important;
+    }
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] > div {
+        width: 91vw !important;
+        max-width: 330px !important;
+    }
+    body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] p {
+        font-size: 10px !important;
     }
 }
 </style>
