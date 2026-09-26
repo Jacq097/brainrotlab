@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Rizz Level | BRAINROT LAB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+        }
+
+        .result-pop {
+            animation: result-pop 480ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        @keyframes result-pop {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-overlay {
+            animation: modal-fade-in 200ms ease-out;
+        }
+
+        .modal-card {
+            animation: modal-slide-up 200ms ease-out;
+        }
+
+        @keyframes modal-fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modal-slide-up {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+    </style>
+
+    <style id="tablet-ipad-responsive-fix">
+/* Tablet / iPad layout fix
+   Only active on tablet-sized viewports. Existing mobile/desktop layout,
+   JavaScript, text, colors, assets and interactions are intentionally left alone. */
+@media screen and (min-width: 700px) and (max-width: 1280px) {
+    html, body {
+        width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    /* Pages built around the 430px mobile canvas */
+    body > main[class*="max-w-[430px]"] {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Keep tablet content centered and readable instead of stretching edge-to-edge. */
+    body > main[class*="max-w-[430px]"] > header,
+    body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Daftar istilah brainrot"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Team members"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz progress"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz question"] {
+        width: 100% !important;
+        max-width: 820px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Keep the original padding feel while giving the tablet some breathing room. */
+    body > main[class*="max-w-[430px]"] > header {
+        box-sizing: border-box;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    /* Index / home page: the title artwork can use the extra tablet space. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] > div {
+        width: 90% !important;
+        max-width: 560px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] {
+        max-width: 520px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Start quiz"] {
+        max-width: 440px !important;
+    }
+
+    /* Fact / dictionary / team cards stay centered and don't become extremely wide. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"] {
+        max-width: 800px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Daftar istilah brainrot"] {
+        max-width: 820px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Team members"] {
+        max-width: 780px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz progress"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz question"] {
+        max-width: 720px !important;
+    }
+
+    /* Result page uses max-w-sm on a wrapper rather than a 430px main. */
+    body > div:first-of-type {
+        width: 100% !important;
+        max-width: 680px !important;
+    }
+
+    /* Do not let the result screenshot card or modal pick up the wrapper width. */
+    #resultCard {
+        width: 100% !important;
+    }
+}
+    </style>
+</head>
+<body class="min-h-screen w-full bg-[#D8EEFD] flex flex-col items-center justify-between p-4 select-none">
+
+    <!-- CONTAINER UTAMA LENGKAP -->
+    <div class="w-full max-w-sm min-h-[90vh] flex flex-col items-center justify-between mx-auto py-4">
+
+        <!-- CARD RESULT (BAHAN UNTUK DOWNLOAD & TAMPILAN) -->
+        <main id="resultCard" class="w-full bg-[#D8EEFD] flex flex-col items-center justify-center text-center py-4 px-2 my-auto">
+
+            <!-- 1. HEADER TITLE -->
+            <header class="w-full mb-6">
+                <h1 class="text-base sm:text-lg font-black text-[#0F172A] tracking-wider uppercase" style="font-family: 'Silkscreen', 'Press Start 2P', monospace;">
+                    MY RIZZ LEVEL IS...
+                </h1>
+            </header>
+
+            <!-- 2. MASCOT IMAGE -->
+            <div class="mb-6 result-pop">
+                <img src="image/rizz.png" alt="Rizz Mascot" class="w-36 h-36 sm:w-44 sm:h-44 object-contain mx-auto" />
+            </div>
+
+            <!-- 3. SCORE PERCENTAGE & TEXT CONTAINER -->
+            <div class="w-full flex flex-col items-center gap-2 mb-6 result-pop">
+                <div id="scorePercentage" class="text-4xl sm:text-5xl font-black text-[#E11D48] tracking-widest" style="font-family: 'Press Start 2P', monospace;" aria-live="polite">
+                    0%
+                </div>
+
+                <div class="max-w-[280px]">
+                    <h2 id="scoreCategory" class="text-xs sm:text-sm font-black text-[#E11D48] uppercase tracking-wide mb-1" aria-live="polite">
+                        Zero Rizz
+                    </h2>
+                    <p id="scoreDesc" class="text-[11px] font-bold text-[#DC2626] leading-tight" aria-live="polite"></p>
+                </div>
+            </div>
+
+            <!-- 4. BADGE "TESTED BY BRAINROT LAB" (KUNING TANPA BORDER) -->
+            <footer class="mt-2">
+                <span class="inline-block bg-[#FEE135] text-slate-900 text-[11px] font-bold px-3 py-1 font-mono rounded-xs shadow-xs">
+                    Tested by Brainrot Lab
+                </span>
+            </footer>
+
+        </main>
+
+        <!-- TOMBOL NAVIGASI DI BAWAH (AMAIN DAN TIDAK KEPOTONG) -->
+        <footer class="flex items-center justify-center gap-3 w-full pt-4 shrink-0" id="navFooter">
+            <a href="index.html" id="homeBtn" class="flex h-11 w-11 items-center justify-center rounded-full bg-white text-slate-800 shadow-md transition-all hover:bg-rose-500 hover:text-white active:scale-95 shrink-0" aria-label="Back to home">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4.5 10.8 12 4l7.5 6.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.2 9.8V19a1.5 1.5 0 0 0 1.5 1.5h8.6A1.5 1.5 0 0 0 17.8 19V9.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 20.5v-5h4v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+            <button id="shareBtn" class="flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-xs font-extrabold text-slate-800 shadow-md transition-all hover:bg-rose-500 hover:text-white active:scale-95">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="18" cy="5" r="3"/>
+                    <circle cx="6" cy="19" r="3"/>
+                    <path d="M13 19a5 5 0 0 1 0-10M13 5a5 5 0 0 1 0 10"/>
+                </svg>
+                Share Result
+            </button>
+        </footer>
+
+    </div>
+
+    <!-- POP-UP MODAL KONFIRMASI -->
+    <div id="downloadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="w-full max-w-sm bg-white rounded-2xl shadow-2xl p-6 modal-card text-center">
+            <h3 id="modalTitle" class="text-lg font-extrabold text-slate-800 mb-2">📸 Ready to share your quiz result?</h3>
+            <p class="text-sm text-slate-600 mb-6">Your test results will be downloaded!</p>
+            <div class="flex flex-col gap-3">
+                <button id="confirmDownloadBtn" class="w-full py-3 px-4 rounded-xl bg-rose-500 text-white font-extrabold text-sm shadow-sm hover:bg-rose-600 transition-colors active:scale-98">
+                    Download
+                </button>
+                <button id="cancelDownloadBtn" class="w-full py-3 px-4 rounded-xl bg-slate-200 text-slate-700 font-extrabold text-sm shadow-sm hover:bg-slate-300 transition-colors active:scale-98">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="pointer-events-none fixed left-1/2 bottom-8 z-50 -translate-x-1/2 translate-y-2 rounded-full bg-slate-900 px-4 py-2.5 text-xs font-bold text-white shadow-lg opacity-0 transition-all duration-300" role="status" aria-live="polite"></div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const rawScore = Number.parseInt(params.get("score") || "0", 10);
+        const score = Number.isFinite(rawScore) ? Math.max(0, Math.min(100, rawScore)) : 0;
+
+        const scorePercentage = document.getElementById("scorePercentage");
+        const scoreCategory = document.getElementById("scoreCategory");
+        const scoreDesc = document.getElementById("scoreDesc");
+        const resultCard = document.getElementById("resultCard");
+        const shareBtn = document.getElementById("shareBtn");
+        const downloadModal = document.getElementById("downloadModal");
+        const confirmDownloadBtn = document.getElementById("confirmDownloadBtn");
+        const cancelDownloadBtn = document.getElementById("cancelDownloadBtn");
+        const toast = document.getElementById("toast");
+
+        const categories = [
+            {
+                minimum: 81,
+                title: "W Rizz (Max Level)",
+                description: "You communicate with high charisma without trying too hard."
+            },
+            {
+                minimum: 51,
+                title: "Subtle Rizz",
+                description: "You keep it cool, balanced, and effortlessly relatable."
+            },
+            {
+                minimum: 31,
+                title: "Brainrot Overload",
+                description: "Your vocabulary is 90% internet culture. Take a breather, blud!"
+            },
+            {
+                minimum: 0,
+                title: "Zero Rizz",
+                description: "Too formal or playing it too safe. Time to upgrade your social game!"
+            }
+        ];
+
+        const category = categories.find((item) => score >= item.minimum) || categories[categories.length - 1];
+
+        scorePercentage.textContent = `${score}%`;
+        scoreCategory.textContent = category.title;
+        scoreDesc.textContent = category.description;
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.remove("opacity-0", "translate-y-2");
+            window.setTimeout(() => {
+                toast.classList.add("opacity-0", "translate-y-2");
+            }, 2400);
+        }
+
+        function showModal() {
+            downloadModal.classList.remove("hidden");
+            downloadModal.classList.add("flex");
+            confirmDownloadBtn.disabled = false;
+            confirmDownloadBtn.textContent = "Download";
+            cancelDownloadBtn.disabled = false;
+        }
+
+        function hideModal() {
+            downloadModal.classList.add("hidden");
+            downloadModal.classList.remove("flex");
+        }
+
+      async function executeDownload() {
+    if (typeof html2canvas !== "function") {
+        showToast("Fitur penyimpanan gambar belum tersedia.");
+        hideModal();
+        return;
+    }
+
+    confirmDownloadBtn.disabled = true;
+    cancelDownloadBtn.disabled = true;
+    confirmDownloadBtn.textContent = "downloading...";
+
+    // 1. Ambil data nilai dari UI kamu
+    const scoreVal = scorePercentage.textContent;
+    const catVal = scoreCategory.textContent;
+    const descVal = scoreDesc.textContent;
+    const mascotSrc = document.querySelector("#resultCard img").src;
+
+    // 2. Buat kanvas tersembunyi berukuran 9:16 (1080 x 1920px)
+    const exportContainer = document.createElement("div");
+    exportContainer.style.position = "fixed";
+    exportContainer.style.left = "-9999px";
+    exportContainer.style.top = "-9999px";
+    exportContainer.style.width = "1080px";
+    exportContainer.style.height = "1920px";
+    exportContainer.style.backgroundColor = "#D8EEFD"; // Warna background persis gambar asli
+    exportContainer.style.display = "flex";
+    exportContainer.style.flexDirection = "column";
+    exportContainer.style.alignItems = "center";
+    exportContainer.style.justifyContent = "flex-start"; // Tata letak dari atas ke bawah
+    exportContainer.style.paddingTop = "220px";          // Jarak ideal header dari atas
+    exportContainer.style.boxSizing = "border-box";
+    exportContainer.style.textAlign = "center";
+
+    // 3. Susun elemen dengan proporsi & jarak presisi mirip foto ke-2
+    exportContainer.innerHTML = `
+        <!-- HEADER TITLE -->
+        <div style="font-family: 'Silkscreen', 'Press Start 2P', monospace; font-size: 42px; font-weight: 900; color: #0F172A; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 120px;">
+            MY RIZZ LEVEL IS...
+        </div>
+        
+        <!-- EMOJI MASCOT -->
+        <div style="margin-bottom: 110px;">
+            <img src="${mascotSrc}" style="width: 460px; height: 460px; object-fit: contain;" />
+        </div>
+        
+        <!-- SCORE PERCENTAGE -->
+        <div style="font-family: 'Press Start 2P', monospace; font-size: 135px; font-weight: 900; color: #E11D48; letter-spacing: 2px; margin-bottom: 45px;">
+            ${scoreVal}
+        </div>
+
+        <!-- CATEGORY TITLE -->
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 36px; font-weight: 800; color: #E11D48; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px;">
+            ${catVal}
+        </div>
+
+        <!-- DESCRIPTION TEXT -->
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 30px; font-weight: 700; color: #E11D48; line-height: 1.35; max-width: 820px; margin-bottom: 100px; padding: 0 20px;">
+            ${descVal}
+        </div>
+        
+        <!-- BADGE "Tested by Brainrot Lab" -->
+        <div>
+            <span style="background-color: #FEE135; color: #000000; font-size: 28px; font-weight: 700; padding: 14px 38px; font-family: monospace; display: inline-block;">
+                Tested by Brainrot Lab
+            </span>
+        </div>
+    `;
+
+    document.body.appendChild(exportContainer);
+
+    try {
+        // Render dengan html2canvas skala tinggi & kontras penuh
+        const canvas = await html2canvas(exportContainer, {
+            backgroundColor: "#D8EEFD",
+            scale: 2,
+            useCORS: true,
+            logging: false
+        });
+
+        const link = document.createElement("a");
+        link.download = "Brainrot-Rizz-Result.png";
+        link.href = canvas.toDataURL("image/png", 1.0);
+        link.click();
+
+        showToast("Image successfully downloaded. 🎉");
+    } catch (error) {
+        showToast("Failed to download image. try again later.");
+    } finally {
+        document.body.removeChild(exportContainer);
+        hideModal();
+    }
+}
+        shareBtn.addEventListener("click", showModal);
+        confirmDownloadBtn.addEventListener("click", executeDownload);
+        cancelDownloadBtn.addEventListener("click", hideModal);
+
+        downloadModal.addEventListener("click", (e) => {
+            if (e.target === downloadModal) {
+                hideModal();
+            }
+        });
+    </script>
+</body>
+</html>

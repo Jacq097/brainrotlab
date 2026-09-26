@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#BAE6FD">
+    <title>Check Your Rizz | BRAINROT LAB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+        }
+
+        .quiz-card-enter {
+            animation: quiz-card-enter 320ms ease-out both;
+        }
+
+        .quiz-card-exit {
+            animation: quiz-card-exit 180ms ease-in both;
+        }
+
+        .quiz-option.selected {
+            background-color: rgba(224, 242, 254, 0.95);
+            border-color: rgba(14, 165, 233, 0.5);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.12), 0 8px 18px -6px rgba(2, 132, 199, 0.18);
+        }
+
+        .quiz-option:disabled {
+            cursor: default;
+        }
+
+        @keyframes quiz-card-enter {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.985);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes quiz-card-exit {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-8px) scale(0.985);
+            }
+        }
+    </style>
+
+    <style id="tablet-ipad-responsive-fix">
+/* Tablet / iPad layout fix
+   Only active on tablet-sized viewports. Existing mobile/desktop layout,
+   JavaScript, text, colors, assets and interactions are intentionally left alone. */
+@media screen and (min-width: 700px) and (max-width: 1280px) {
+    html, body {
+        width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    /* Pages built around the 430px mobile canvas */
+    body > main[class*="max-w-[430px]"] {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Keep tablet content centered and readable instead of stretching edge-to-edge. */
+    body > main[class*="max-w-[430px]"] > header,
+    body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Daftar istilah brainrot"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Team members"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz progress"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz question"] {
+        width: 100% !important;
+        max-width: 820px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Keep the original padding feel while giving the tablet some breathing room. */
+    body > main[class*="max-w-[430px]"] > header {
+        box-sizing: border-box;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    /* Index / home page: the title artwork can use the extra tablet space. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] > div {
+        width: 90% !important;
+        max-width: 560px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] {
+        max-width: 520px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Start quiz"] {
+        max-width: 440px !important;
+    }
+
+    /* Fact / dictionary / team cards stay centered and don't become extremely wide. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"] {
+        max-width: 800px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Daftar istilah brainrot"] {
+        max-width: 820px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Team members"] {
+        max-width: 780px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz progress"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz question"] {
+        max-width: 720px !important;
+    }
+
+    /* Tablet / iPad: make answer choices easier to tap and read without changing the JS-generated classes. */
+    body > main[class*="max-w-[430px]"] .quiz-option {
+        min-height: 58px !important;
+        padding: 0.9rem 1rem !important;
+        margin-bottom: 0.65rem !important;
+        font-size: 0.875rem !important;
+        line-height: 1.35 !important;
+        gap: 0.75rem !important;
+    }
+
+    /* Result page uses max-w-sm on a wrapper rather than a 430px main. */
+    body > div:first-of-type {
+        width: 100% !important;
+        max-width: 680px !important;
+    }
+
+    /* Do not let the result screenshot card or modal pick up the wrapper width. */
+    #resultCard {
+        width: 100% !important;
+    }
+}
+    </style>
+</head>
+<body class="min-h-screen bg-amber-50 text-slate-800">
+    <main class="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-gradient-to-b from-sky-100 via-pink-50 to-amber-100 px-4 py-4">
+        <div class="pointer-events-none absolute -left-16 top-36 h-44 w-44 rounded-full bg-sky-200/35 blur-2xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -right-20 top-[30rem] h-52 w-52 rounded-full bg-rose-100/35 blur-2xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute bottom-16 left-5 h-28 w-28 rounded-full bg-amber-200/35 blur-xl" aria-hidden="true"></div>
+
+        <header class="relative w-full flex justify-center items-center pt-2 pb-3">
+            <a href="index.html" class="absolute left-0 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-sm font-bold text-slate-700 shadow-sm backdrop-blur-md transition-all hover:bg-rose-500 hover:text-white z-10" aria-label="Back to home">&lt;</a>
+            <h1 class="text-2xl font-black text-sky-500 tracking-wide">Check Your Rizz!</h1>
+        </header>
+
+        <section class="relative z-10 mt-3" aria-label="Quiz progress">
+            <div class="mb-1 flex justify-between text-xs font-bold text-slate-500">
+                <span>Question <span id="currentQuestion">1</span> /10</span>
+            </div>
+            <div class="h-2.5 overflow-hidden rounded-full bg-slate-200/80">
+                <div id="progressBar" class="h-full rounded-full bg-gradient-to-r from-sky-400 to-rose-400 transition-all duration-500 ease-out" style="width: 10%;"></div>
+            </div>
+        </section>
+
+        <section class="relative z-10 mt-4" aria-label="Quiz question">
+            <article id="quizCard" class="bg-white/90 backdrop-blur-md rounded-2xl p-5 shadow-lg border border-white/80 transition-all duration-300 quiz-card-enter">
+                <span id="topicBadge" class="inline-block bg-sky-100 text-sky-700 text-[10px] font-extrabold px-2.5 py-1 rounded-full mb-2 uppercase tracking-wider"></span>
+                <h2 id="questionText" class="text-sm font-extrabold text-slate-800 mb-4 leading-snug" aria-live="polite"></h2>
+                <div id="optionsContainer" class="flex flex-col"></div>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            {
+                topic: "Respon Chat Teman",
+                text: "Teman kamu cuma bales DM cerita panjang kamu pake emoji \"💀\"",
+                options: [
+                    { text: "\"Lho, kok cuma emoji tengkorak? Maksudnya lucu apa gimana?\"", points: 1 },
+                    { text: "\"Ketawa beneran atau cuma menghargai nih? 🤨\"", points: 7 },
+                    { text: "\"Real no cap, cerita gue emang segacor itu sih😎\"", points: 10 },
+                    { text: "\"Skibidi rizzler moment, gyatt level 10 gak tuh cerita gua?\"", points: 4 }
+                ]
+            },
+            {
+                topic: "Situasi di Tongkrongan",
+                text: "Temen lagi curhat sedih karena nilai ujiannya jelek",
+                options: [
+                    { text: "\"So sorry to hear that, lain kali belajar lebih giat lagi.\"", points: 1 },
+                    { text: "\"Its okay, nanti kita belajar bareng biar bisa bantai di ujian berikutnya.\"", points: 7 },
+                    { text: "\"Senyum dulu dong. Nilai bisa di-remed, tapi manisnya kamu gak ada obatnya.\"", points: 10 },
+                    { text: "\"Fix skill issue sih. Kurangin mewing, banyakin belajar biar aura +1000!\"", points: 4 }
+                ]
+            },
+            {
+                topic: "Dinotice Orang Lain",
+                text: "Ada seseorang yang kasih kamu compliment “Bagus banget OOTD lo!”",
+                options: [
+                    { text: "\"Masa sih? Ini cuma baju murah beli di online shop kok.\"", points: 1 },
+                    { text: "\"Thank you! Kamu juga outfitnya chic banget hari ini.\"", points: 7 },
+                    { text: "\"Outfitnya sih biasa aja, tapi aura gue yang bikin bajunya keliatan mahal.\"", points: 10 },
+                    { text: "\"Auto Sigma Grindset gak sih? Aura gue langsung melambung tinggi!\"", points: 4 }
+                ]
+            },
+            {
+                topic: "Bikin Janji Jalan",
+                text: "Kamu mau ngajak temen kamu untuk ngopi bareng weekend ini",
+                options: [
+                    { text: "\"Lo free ga hari Sabtu untuk minum kopi bareng gue?”", points: 1 },
+                    { text: "\"Weekend ini kosong gak? Nongki yuk, ada tempat hits baru.\"", points: 7 },
+                    { text: "\"List café udah siap, tinggal nunggu main character-nya nih. Sabtu kosong?\"", points: 10 },
+                    { text: "\"Sabtu ini mewing time di kafe yok, biar Rizz level kita max bareng!\"", points: 4 }
+                ]
+            },
+            {
+                topic: "Beda Pendapat",
+                text: "Temen kamu nge-drop opini hot take yang aneh banget pas diskusi",
+                options: [
+                    { text: "\"Gue kurang setuju sama pendapat lo karena gak masuk akal.\"", points: 1 },
+                    { text: "\"Valid sih poin lu, tapi menurut gue ada POV lain yang lebih dapet.\"", points: 7 },
+                    { text: "\"Opini lu menarik, tapi jujur belum bisa ngalahin pesona argumen gue.\"", points: 10 },
+                    { text: "\"Bro really thought he cooked 💀 Blud think he is the ultimate Sigma!\"", points: 4 }
+                ]
+            },
+            {
+                topic: "Respon Pesan Lambat",
+                text: "Pacar kamu bales chat setelah 8 jam tanpa kabar",
+                options: [
+                    { text: "\"Kenapa baru bales jam segini? Dari mana aja kamu?\"", points: 1 },
+                    { text: "\"Busy day ya? It's fine, take your time ajaa.\"", points: 7 },
+                    { text: "\"Definisi save the best for last ya? Balesnya lama banget, tapi tetep aja bikin senyum.\"", points: 10 },
+                    { text: "\"AFK 8 jam? Kena phantom tax atau nyasar di Ohio?\"", points: 4 }
+                ]
+            },
+            {
+                topic: "Menghadapi Situasi Canggung",
+                text: "Lagi jalan berdua tapi mendadak hening/awkward silence",
+                options: [
+                    { text: "Permisi ke toilet karena bingung mau ngomong apa lagi.", points: 1 },
+                    { text: "\"Eh sorry ya, gue agak gak fokus bingung mau bahas apa lagi nih haha.\"", points: 7 },
+                    { text: "Tatap matanya, \"Gak apa-apa ga ada suara, yang penting moment-nya bareng kamu.\"", points: 10 },
+                    { text: "Langsung hit the griddy atau mogging pas di depan dia biar gak kaku.", points: 4 }
+                ]
+            },
+            {
+                topic: "Minta Tolong",
+                text: "Kamu lagi butuh bantuan temen buat ngejelasin materi sekolah",
+                options: [
+                    { text: "\"Lo bisa bantu jelasin materi ini gak? Gue gak ngerti sama sekali.\"", points: 1 },
+                    { text: "\"Lo paham materi ini gak? Spill pemahaman lu dong kalo sempet.\"", points: 7 },
+                    { text: "\"Gue butuh savior nih buat nyelametin nilai. Lu mau jadi pahlawan gue?\"", points: 10 },
+                    { text: "\"Help me please, otak gue udah kena brainrot parah gara-gara materi ini!\"", points: 4 }
+                ]
+            },
+            {
+                topic: "Pamer Pencapaian",
+                text: "Kamu menang lomba dan mau posting di media sosial",
+                options: [
+                    { text: "\"Alhamdulillah/Puji syukur berhasil meraih juara 1 dalam kompetisi hari ini.\"", points: 1 },
+                    { text: "\"Secured the W! Big thanks buat semua yang udah support dari awal 🏆\"", points: 7 },
+                    { text: "\"Hard work + aura positif emang gak pernah gagal menghasilkan W.\"", points: 10 },
+                    { text: "\"Unspoken Rizz + Skibidi Grindset = Auto Juara 1 No Counter!\"", points: 4 }
+                ]
+            },
+            {
+                topic: "Liat Foto atau Selfie Crush",
+                text: "Kamu liat crush posting foto baru di Story IG",
+                options: [
+                    { text: "Cuma like story IG nya aja terus berharap dia yang nge-chat duluan.", points: 1 },
+                    { text: "Reply story: \"Bagus banget fotonya, apa lagi orang yang ada di fotonya”", points: 7 },
+                    { text: "Reply story: \"Story IG gue beruntung banget bisa nampilin visual se-gacor ini.\"", points: 10 },
+                    { text: "Reply story: \"Visual-nya gak ngotak woi! Aura +1000000, auto simping parah gue!\"", points: 4 }
+                ]
+            }
+        ];
+
+        const quizCard = document.getElementById("quizCard");
+        const topicBadge = document.getElementById("topicBadge");
+        const questionText = document.getElementById("questionText");
+        const optionsContainer = document.getElementById("optionsContainer");
+        const currentQuestion = document.getElementById("currentQuestion");
+        const progressBar = document.getElementById("progressBar");
+        const optionLetters = ["A", "B", "C", "D"];
+
+        let currentQuestionIndex = 0;
+        let totalScore = 0;
+        let isAnswering = false;
+
+        function renderQuestion() {
+            const question = questions[currentQuestionIndex];
+            topicBadge.textContent = question.topic;
+            questionText.textContent = question.text;
+            optionsContainer.innerHTML = "";
+
+            question.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "quiz-option w-full p-3 mb-2.5 bg-amber-100/80 hover:bg-amber-200/90 active:scale-98 rounded-xl text-xs font-semibold text-slate-800 text-left transition-all border border-amber-200/60 shadow-sm flex items-start gap-2.5";
+
+                const letter = document.createElement("span");
+                letter.className = "w-5 h-5 rounded-full bg-white text-slate-700 font-bold flex items-center justify-center shrink-0 text-[10px]";
+                letter.textContent = optionLetters[index];
+
+                const label = document.createElement("span");
+                label.textContent = option.text;
+
+                button.appendChild(letter);
+                button.appendChild(label);
+                button.addEventListener("click", () => chooseAnswer(option, button));
+                optionsContainer.appendChild(button);
+            });
+
+            quizCard.classList.remove("quiz-card-exit");
+            quizCard.classList.add("quiz-card-enter");
+        }
+
+        function chooseAnswer(option, selectedButton) {
+            if (isAnswering) {
+                return;
+            }
+
+            isAnswering = true;
+            totalScore += option.points;
+
+            Array.from(optionsContainer.children).forEach((button) => {
+                button.disabled = true;
+                if (button === selectedButton) {
+                    button.classList.add("selected");
+                }
+            });
+
+            const nextQuestionIndex = currentQuestionIndex + 1;
+            currentQuestion.textContent = nextQuestionIndex;
+            progressBar.style.width = `${(nextQuestionIndex / questions.length) * 100}%`;
+
+            if (currentQuestionIndex === questions.length - 1) {
+                window.setTimeout(() => {
+                    window.location.href = 'quiz-result.html?score=' + totalScore;
+                }, 550);
+                return;
+            }
+
+            quizCard.classList.add("quiz-card-exit");
+            window.setTimeout(() => {
+                currentQuestionIndex = nextQuestionIndex;
+                renderQuestion();
+                isAnswering = false;
+            }, 180);
+        }
+
+        renderQuestion();
+    </script>
+</body>
+</html>

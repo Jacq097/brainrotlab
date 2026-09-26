@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FBCFE8">
+    <title>Rizzearch Team | Brainrot Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+        }
+
+        .float-slow {
+            animation: float-slow 5s ease-in-out infinite;
+        }
+
+        .float-reverse {
+            animation: float-reverse 6s ease-in-out infinite;
+        }
+
+        @keyframes float-slow {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-8px) rotate(3deg);
+            }
+        }
+
+        @keyframes float-reverse {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(7px) rotate(-3deg);
+            }
+        }
+    </style>
+
+    <style id="tablet-ipad-responsive-fix">
+/* Tablet / iPad layout fix
+   Only active on tablet-sized viewports. Existing mobile/desktop layout,
+   JavaScript, text, colors, assets and interactions are intentionally left alone. */
+@media screen and (min-width: 700px) and (max-width: 1280px) {
+    html, body {
+        width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    /* Pages built around the 430px mobile canvas */
+    body > main[class*="max-w-[430px]"] {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Keep tablet content centered and readable instead of stretching edge-to-edge. */
+    body > main[class*="max-w-[430px]"] > header,
+    body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Daftar istilah brainrot"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Team members"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz progress"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz question"] {
+        width: 100% !important;
+        max-width: 820px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Keep the original padding feel while giving the tablet some breathing room. */
+    body > main[class*="max-w-[430px]"] > header {
+        box-sizing: border-box;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    /* Index / home page: the title artwork can use the extra tablet space. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] > div {
+        width: 90% !important;
+        max-width: 560px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] {
+        max-width: 520px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Start quiz"] {
+        max-width: 440px !important;
+    }
+
+    /* Fact / dictionary / team cards stay centered and don't become extremely wide. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"] {
+        max-width: 800px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Daftar istilah brainrot"] {
+        max-width: 820px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Team members"] {
+        max-width: 780px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz progress"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz question"] {
+        max-width: 720px !important;
+    }
+
+    /* Result page uses max-w-sm on a wrapper rather than a 430px main. */
+    body > div:first-of-type {
+        width: 100% !important;
+        max-width: 680px !important;
+    }
+
+    /* Do not let the result screenshot card or modal pick up the wrapper width. */
+    #resultCard {
+        width: 100% !important;
+    }
+}
+    </style>
+</head>
+<body class="min-h-screen bg-white text-slate-800">
+    <main class="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-gradient-to-b from-pink-200 via-pink-100 to-white px-6 py-4">
+        <div class="pointer-events-none absolute -left-16 top-28 h-44 w-44 rounded-full bg-pink-200/50 blur-2xl float-slow" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -right-20 top-80 h-52 w-52 rounded-full bg-sky-100/50 blur-2xl float-reverse" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute bottom-20 left-4 h-28 w-28 rounded-full bg-amber-100/40 blur-xl" aria-hidden="true"></div>
+
+        <header class="relative w-full flex justify-center items-center pt-4 pb-2 px-4">
+            <a href="index.html" class="absolute left-4 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-sm font-bold text-slate-700 shadow-sm backdrop-blur-md transition-all hover:bg-rose-500 hover:text-white z-10" aria-label="Back to home">&lt;</a>
+            <h1 class="text-2xl sm:text-3xl font-black text-sky-500 text-center tracking-wide">Rizzearch Team</h1>
+        </header>
+
+        <section class="relative z-10 mx-4 mt-3 mb-4 rounded-2xl border border-white/50 bg-white/70 p-4 text-center text-xs leading-relaxed text-slate-600 shadow-sm backdrop-blur-sm">
+            <p>
+                Growing up in a fast-paced digital era, we believe every story, trend, and conversation has a spark. Rizzearch Team explores digital communication with curiosity, creativity, and a little brainrot energy.
+            </p>
+        </section>
+
+        <section class="relative z-10 mt-3 pb-10" aria-label="Team members">
+            <article class="mx-4 mb-4 flex flex-col items-center rounded-2xl border border-white/60 bg-white/80 p-4 shadow-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <div class="h-40 w-32 overflow-hidden rounded-lg bg-gradient-to-br from-rose-100 to-sky-100 shadow-md">
+                    <img src="image/fatihah.png" alt="Fatihah Sahda Farras" class="h-full w-full object-cover" loading="lazy" decoding="async">
+                </div>
+                <div class="mt-4 w-full text-center">
+                    <h2 class="text-lg font-bold leading-snug text-rose-600">Fatihah Sahda Farras</h2>
+                    <p class="mb-2 mt-2 text-xs font-semibold text-slate-700">Leader &amp; Lead Rizzearcher</p>
+                    <p class="text-[11px] leading-snug text-slate-600">
+                        A dedicated high school student at SMA Islam Harapan Ibu with a deep passion for science. Actively involved in student organizations and various competitions while consistently maintaining strong academic performance. Possesses strong leadership, discipline, and a deep scientific curiosity.
+                    </p>
+                </div>
+            </article>
+
+            <article class="mx-4 mb-4 flex flex-col items-center rounded-2xl border border-white/60 bg-white/80 p-4 shadow-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <div class="h-40 w-32 overflow-hidden rounded-lg bg-gradient-to-br from-indigo-100 to-amber-100 shadow-md">
+                    <img src="image/altha.jpeg" alt="Hafiza Althafunnisa Putri A." class="h-full w-full object-cover" loading="lazy" decoding="async">
+                </div>
+                <div class="mt-4 w-full text-center">
+                    <h2 class="text-lg font-bold leading-snug text-rose-600">Hafiza Althafunnisa Putri A.</h2>
+                    <p class="mb-2 mt-2 text-xs font-semibold text-slate-700">Co-Leader &amp; Brainrot Analyst</p>
+                    <p class="text-[11px] leading-snug text-slate-600">
+                        As an active, communicative, and leadership-driven high school student at SMA Islam Harapan Ibu, I bring a proven track record in organizational management and public relations. Highly adaptable, solution-oriented, and a collaborative team player, I am deeply committed to driving positive impact and continuously developing my potential in event management and public relations.
+                    </p>
+                </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

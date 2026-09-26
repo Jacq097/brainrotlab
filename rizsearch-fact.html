@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FEF3C7">
+    <title>Rizzearch Fact | BRAINROT LAB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+        }
+
+        .float-slow {
+            animation: float-slow 5s ease-in-out infinite;
+        }
+
+        .float-reverse {
+            animation: float-reverse 6s ease-in-out infinite;
+        }
+
+        @keyframes float-slow {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-8px) rotate(3deg);
+            }
+        }
+
+        @keyframes float-reverse {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(7px) rotate(-3deg);
+            }
+        }
+    </style>
+
+    <style id="tablet-ipad-responsive-fix">
+/* Tablet / iPad layout fix
+   Only active on tablet-sized viewports. Existing mobile/desktop layout,
+   JavaScript, text, colors, assets and interactions are intentionally left alone. */
+@media screen and (min-width: 700px) and (max-width: 1280px) {
+    html, body {
+        width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    /* Pages built around the 430px mobile canvas */
+    body > main[class*="max-w-[430px]"] {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Keep tablet content centered and readable instead of stretching edge-to-edge. */
+    body > main[class*="max-w-[430px]"] > header,
+    body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Daftar istilah brainrot"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Team members"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz progress"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz question"] {
+        width: 100% !important;
+        max-width: 820px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Keep the original padding feel while giving the tablet some breathing room. */
+    body > main[class*="max-w-[430px]"] > header {
+        box-sizing: border-box;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    /* Index / home page: the title artwork can use the extra tablet space. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] > div {
+        width: 90% !important;
+        max-width: 560px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] {
+        max-width: 520px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Start quiz"] {
+        max-width: 440px !important;
+    }
+
+    /* Fact / dictionary / team cards stay centered and don't become extremely wide. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"] {
+        max-width: 800px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Daftar istilah brainrot"] {
+        max-width: 820px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Team members"] {
+        max-width: 780px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz progress"],
+    body > main[class*="max-w-[430px]"] > section[aria-label="Quiz question"] {
+        max-width: 720px !important;
+    }
+
+    /* Result page uses max-w-sm on a wrapper rather than a 430px main. */
+    body > div:first-of-type {
+        width: 100% !important;
+        max-width: 680px !important;
+    }
+
+    /* Do not let the result screenshot card or modal pick up the wrapper width. */
+    #resultCard {
+        width: 100% !important;
+    }
+}
+    </style>
+</head>
+<body class="min-h-screen bg-amber-50 text-slate-800">
+    <main class="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-gradient-to-b from-amber-100 via-yellow-50 to-amber-100 px-4 py-3">
+        <div class="pointer-events-none absolute -left-16 top-32 h-44 w-44 rounded-full bg-amber-200/40 blur-2xl float-slow" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -right-20 top-96 h-52 w-52 rounded-full bg-rose-100/35 blur-2xl float-reverse" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute bottom-16 left-6 h-28 w-28 rounded-full bg-yellow-200/35 blur-xl" aria-hidden="true"></div>
+
+        <header class="relative w-full flex justify-center items-center pt-2 pb-4">
+            <a href="index.html" class="absolute left-0 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-sm font-bold text-slate-700 shadow-sm backdrop-blur-md transition-all hover:bg-rose-500 hover:text-white z-10" aria-label="Back to home">&lt;</a>
+            <h1 class="text-2xl sm:text-3xl font-black text-sky-500 text-center tracking-wide drop-shadow-sm">Rizzearch Fact</h1>
+        </header>
+
+        <section class="relative z-10 pb-8" aria-label="Rizzearch Fact abstracts">
+            <article class="rounded-2xl border border-white/60 bg-white/85 p-4 shadow-md backdrop-blur-md mb-4">
+                <span class="mb-2 block text-[10px] font-bold uppercase tracking-wider text-slate-500">(English)</span>
+                <p class="text-xs font-normal leading-relaxed text-justify text-slate-700">
+                    The language phenomenon known as 'brainrot' has developed as part of digital communication among teenagers through the use of terms such as skibidi, sigma, rizz, gyatt, and delulu. This study aims to identify the forms of brainrot language, analyze its social functions, and examine the linguistic creativity and digital identity embedded in its usage. The research employs an exploratory mixed-methods approach, dominated by qualitative analysis and supported by descriptive quantitative data. Data was collected through questionnaires administered to 110 respondents aged 11–16 years old, alongside an analysis of 200 comments from 10 TikTok videos. The findings indicate that the most prevalent linguistic categories are neologisms (98.5%) and semantic shifts (53.5%). In terms of social function, humor emerged as the most dominant category (73.5%), whereas solidarity was found in a more limited proportion (8%). Regarding digital identity, community membership was the most frequently identified category (52.5%), while digital generational markers accounted for only 2.5% of the comments. Questionnaire results also revealed that most respondents do not explicitly view brainrot as a tool for constructing self-image or generational identity. These findings suggest that brainrot, within the context of this study, serves as a creative and contextual digital communication practice, primarily tied to linguistic variation, humor, and active participation in digital communication.
+                </p>
+                <p class="mt-3 border-t border-slate-100 pt-2 text-xs font-semibold text-rose-600">
+                    Keywords: brainrot, digital language, teenagers, linguistic creativity, digital identity, TikTok.
+                </p>
+            </article>
+
+            <article class="rounded-2xl border border-white/60 bg-white/85 p-4 shadow-md backdrop-blur-md mb-6">
+                <span class="mb-2 block text-[10px] font-bold uppercase tracking-wider text-slate-500">(Bahasa Indonesia)</span>
+                <p class="text-xs font-normal leading-relaxed text-justify text-slate-700">
+                    Fenomena bahasa brainrot berkembang sebagai bagian dari komunikasi digital remaja melalui penggunaan istilah seperti skibidi, sigma, rizz, gyatt, dan delulu. Penelitian ini bertujuan mengidentifikasi bentuk bahasa brainrot, menganalisis fungsi sosialnya, serta mengkaji kreativitas linguistik dan identitas digital dalam penggunaannya. Penelitian menggunakan metode campuran eksploratif dengan dominasi analisis kualitatif dan dukungan data kuantitatif deskriptif. Data diperoleh melalui kuesioner terhadap 110 responden berusia 11–16 tahun serta analisis terhadap 200 komentar dari 10 video TikTok. Hasil penelitian menunjukkan bahwa kategori linguistik yang paling banyak ditemukan adalah neologisme (98,5%) dan pergeseran makna (53,5%). Pada fungsi sosial, humor menjadi kategori yang paling dominan (73,5%), sedangkan solidaritas ditemukan dalam proporsi yang lebih terbatas (8%). Pada dimensi identitas digital, keanggotaan komunitas (in-group) merupakan kategori yang paling banyak ditemukan (52,5%), sementara penanda generasi digital hanya ditemukan pada 2,5% komentar. Hasil kuesioner juga menunjukkan bahwa sebagian besar responden tidak secara langsung menganggap brainrot sebagai sarana membangun citra diri atau identitas generasi. Temuan ini menunjukkan bahwa brainrot dalam penelitian ini merupakan praktik komunikasi digital yang kreatif dan kontekstual, terutama berkaitan dengan variasi linguistik, humor, dan partisipasi dalam komunikasi digital.
+                </p>
+                <p class="mt-3 border-t border-slate-100 pt-2 text-xs font-semibold text-rose-600">
+                    Kata kunci: brainrot, bahasa digital, remaja, kreativitas linguistik, identitas digital, TikTok.
+                </p>
+            </article>
+        </section>
+    </main>
+</body>
+</html>
