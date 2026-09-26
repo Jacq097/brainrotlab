@@ -51,9 +51,6 @@
     </style>
 
     <style id="tablet-ipad-responsive-fix">
-/* Tablet / iPad layout fix
-   Only active on tablet-sized viewports. Existing mobile/desktop layout,
-   JavaScript, text, colors, assets and interactions are intentionally left alone. */
 @media screen and (min-width: 700px) and (max-width: 1280px) {
     html, body {
         width: 100%;
@@ -61,7 +58,6 @@
         overflow-x: hidden;
     }
 
-    /* Pages built around the 430px mobile canvas */
     body > main[class*="max-w-[430px]"] {
         width: 100% !important;
         max-width: none !important;
@@ -69,7 +65,6 @@
         margin-right: auto !important;
     }
 
-    /* Keep tablet content centered and readable instead of stretching edge-to-edge. */
     body > main[class*="max-w-[430px]"] > header,
     body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"],
     body > main[class*="max-w-[430px]"] > section[aria-label="Daftar istilah brainrot"],
@@ -82,14 +77,12 @@
         margin-right: auto !important;
     }
 
-    /* Keep the original padding feel while giving the tablet some breathing room. */
     body > main[class*="max-w-[430px]"] > header {
         box-sizing: border-box;
         padding-left: 24px !important;
         padding-right: 24px !important;
     }
 
-    /* Index / home page: the title artwork can use the extra tablet space. */
     body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] > div {
         width: 90% !important;
         max-width: 560px !important;
@@ -103,7 +96,6 @@
         max-width: 440px !important;
     }
 
-    /* Fact / dictionary / team cards stay centered and don't become extremely wide. */
     body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"] {
         max-width: 800px !important;
     }
@@ -121,13 +113,11 @@
         max-width: 720px !important;
     }
 
-    /* Result page uses max-w-sm on a wrapper rather than a 430px main. */
     body > div:first-of-type {
         width: 100% !important;
         max-width: 680px !important;
     }
 
-    /* Do not let the result screenshot card or modal pick up the wrapper width. */
     #resultCard {
         width: 100% !important;
     }
@@ -136,58 +126,58 @@
 </head>
 <body class="min-h-screen w-full bg-[#D8EEFD] flex flex-col items-center justify-between p-4 select-none">
 
-    <!-- CONTAINER UTAMA LENGKAP -->
-    <div class="w-full max-w-sm min-h-[90vh] flex flex-col items-center justify-between mx-auto py-4">
+    <!-- CONTAINER UTAMA -->
+    <div class="w-full max-w-md sm:max-w-xl min-h-[95vh] flex flex-col items-center justify-between mx-auto py-2">
 
-        <!-- CARD RESULT (BAHAN UNTUK DOWNLOAD & TAMPILAN) -->
-        <main id="resultCard" class="w-full bg-[#D8EEFD] flex flex-col items-center justify-center text-center py-4 px-2 my-auto">
+        <!-- CARD RESULT -->
+        <main id="resultCard" class="w-full bg-[#D8EEFD] flex flex-col items-center justify-center text-center py-2 px-2 my-auto">
 
             <!-- 1. HEADER TITLE -->
-            <header class="w-full mb-6">
-                <h1 class="text-base sm:text-lg font-black text-[#0F172A] tracking-wider uppercase" style="font-family: 'Silkscreen', 'Press Start 2P', monospace;">
+            <header class="w-full mb-3 sm:mb-4">
+                <h1 class="text-lg sm:text-2xl font-black text-[#0F172A] tracking-wider uppercase" style="font-family: 'Silkscreen', 'Press Start 2P', monospace;">
                     MY RIZZ LEVEL IS...
                 </h1>
             </header>
 
-            <!-- 2. MASCOT IMAGE -->
-            <div class="mb-6 result-pop">
-                <img src="image/rizz.png" alt="Rizz Mascot" class="w-36 h-36 sm:w-44 sm:h-44 object-contain mx-auto" />
+            <!-- 2. MASCOT IMAGE (SANGAT BESAR: w-64/w-80) -->
+            <div class="mb-4 sm:mb-6 result-pop">
+                <img src="image/rizz.png" alt="Rizz Mascot" class="w-64 h-64 sm:w-80 sm:h-80 object-contain mx-auto" />
             </div>
 
-            <!-- 3. SCORE PERCENTAGE & TEXT CONTAINER -->
-            <div class="w-full flex flex-col items-center gap-2 mb-6 result-pop">
-                <div id="scorePercentage" class="text-4xl sm:text-5xl font-black text-[#E11D48] tracking-widest" style="font-family: 'Press Start 2P', monospace;" aria-live="polite">
+            <!-- 3. SCORE PERCENTAGE (MEGA SIZE: text-7xl/text-8xl) & TEXT CONTAINER -->
+            <div class="w-full flex flex-col items-center gap-3 mb-4 sm:mb-6 result-pop">
+                <div id="scorePercentage" class="text-7xl sm:text-8xl font-black text-[#E11D48] tracking-widest leading-none" style="font-family: 'Press Start 2P', monospace;" aria-live="polite">
                     0%
                 </div>
 
-                <div class="max-w-[280px]">
-                    <h2 id="scoreCategory" class="text-xs sm:text-sm font-black text-[#E11D48] uppercase tracking-wide mb-1" aria-live="polite">
+                <div class="max-w-[340px] sm:max-w-[420px]">
+                    <h2 id="scoreCategory" class="text-base sm:text-xl font-black text-[#E11D48] uppercase tracking-wide mb-1" aria-live="polite">
                         Zero Rizz
                     </h2>
-                    <p id="scoreDesc" class="text-[11px] font-bold text-[#DC2626] leading-tight" aria-live="polite"></p>
+                    <p id="scoreDesc" class="text-xs sm:text-base font-bold text-[#DC2626] leading-snug" aria-live="polite"></p>
                 </div>
             </div>
 
-            <!-- 4. BADGE "TESTED BY BRAINROT LAB" (KUNING TANPA BORDER) -->
-            <footer class="mt-2">
-                <span class="inline-block bg-[#FEE135] text-slate-900 text-[11px] font-bold px-3 py-1 font-mono rounded-xs shadow-xs">
+            <!-- 4. BADGE "TESTED BY BRAINROT LAB" -->
+            <footer class="mt-1">
+                <span class="inline-block bg-[#FEE135] text-slate-900 text-xs sm:text-sm font-bold px-4 py-1.5 font-mono rounded-xs shadow-xs">
                     Tested by Brainrot Lab
                 </span>
             </footer>
 
         </main>
 
-        <!-- TOMBOL NAVIGASI DI BAWAH (AMAIN DAN TIDAK KEPOTONG) -->
-        <footer class="flex items-center justify-center gap-3 w-full pt-4 shrink-0" id="navFooter">
-            <a href="index.html" id="homeBtn" class="flex h-11 w-11 items-center justify-center rounded-full bg-white text-slate-800 shadow-md transition-all hover:bg-rose-500 hover:text-white active:scale-95 shrink-0" aria-label="Back to home">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <!-- TOMBOL NAVIGASI -->
+        <footer class="flex items-center justify-center gap-3 w-full pt-2 shrink-0" id="navFooter">
+            <a href="index.html" id="homeBtn" class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-slate-800 shadow-md transition-all hover:bg-rose-500 hover:text-white active:scale-95 shrink-0" aria-label="Back to home">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M4.5 10.8 12 4l7.5 6.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M6.2 9.8V19a1.5 1.5 0 0 0 1.5 1.5h8.6A1.5 1.5 0 0 0 17.8 19V9.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M10 20.5v-5h4v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </a>
-            <button id="shareBtn" class="flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-xs font-extrabold text-slate-800 shadow-md transition-all hover:bg-rose-500 hover:text-white active:scale-95">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <button id="shareBtn" class="flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-extrabold text-slate-800 shadow-md transition-all hover:bg-rose-500 hover:text-white active:scale-95">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="18" cy="5" r="3"/>
                     <circle cx="6" cy="19" r="3"/>
                     <path d="M13 19a5 5 0 0 1 0-10M13 5a5 5 0 0 1 0 10"/>
@@ -282,7 +272,7 @@
             downloadModal.classList.remove("flex");
         }
 
-      async function executeDownload() {
+  async function executeDownload() {
     if (typeof html2canvas !== "function") {
         showToast("Fitur penyimpanan gambar belum tersedia.");
         hideModal();
@@ -293,7 +283,7 @@
     cancelDownloadBtn.disabled = true;
     confirmDownloadBtn.textContent = "downloading...";
 
-    // 1. Ambil data nilai dari UI kamu
+    // 1. Ambil data dari UI
     const scoreVal = scorePercentage.textContent;
     const catVal = scoreCategory.textContent;
     const descVal = scoreDesc.textContent;
@@ -306,54 +296,56 @@
     exportContainer.style.top = "-9999px";
     exportContainer.style.width = "1080px";
     exportContainer.style.height = "1920px";
-    exportContainer.style.backgroundColor = "#D8EEFD"; // Warna background persis gambar asli
+    exportContainer.style.backgroundColor = "#D8EEFD";
     exportContainer.style.display = "flex";
     exportContainer.style.flexDirection = "column";
     exportContainer.style.alignItems = "center";
-    exportContainer.style.justifyContent = "flex-start"; // Tata letak dari atas ke bawah
-    exportContainer.style.paddingTop = "220px";          // Jarak ideal header dari atas
+    exportContainer.style.justifyContent = "flex-start";
+    exportContainer.style.paddingTop = "140px";
     exportContainer.style.boxSizing = "border-box";
     exportContainer.style.textAlign = "center";
 
-    // 3. Susun elemen dengan proporsi & jarak presisi mirip foto ke-2
+    // 3. Susun elemen hasil download dengan BADGE SVG PRESISI KUNING
     exportContainer.innerHTML = `
         <!-- HEADER TITLE -->
-        <div style="font-family: 'Silkscreen', 'Press Start 2P', monospace; font-size: 42px; font-weight: 900; color: #0F172A; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 120px;">
+        <div style="font-family: 'Silkscreen', 'Press Start 2P', monospace; font-size: 46px; font-weight: 900; color: #0F172A; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 60px;">
             MY RIZZ LEVEL IS...
         </div>
         
         <!-- EMOJI MASCOT -->
-        <div style="margin-bottom: 110px;">
-            <img src="${mascotSrc}" style="width: 460px; height: 460px; object-fit: contain;" />
+        <div style="margin-bottom: 60px;">
+            <img src="${mascotSrc}" style="width: 680px; height: 680px; object-fit: contain;" />
         </div>
         
         <!-- SCORE PERCENTAGE -->
-        <div style="font-family: 'Press Start 2P', monospace; font-size: 135px; font-weight: 900; color: #E11D48; letter-spacing: 2px; margin-bottom: 45px;">
+        <div style="font-family: 'Press Start 2P', monospace; font-size: 210px; font-weight: 900; color: #E11D48; letter-spacing: 2px; margin-bottom: 30px; line-height: 1;">
             ${scoreVal}
         </div>
 
         <!-- CATEGORY TITLE -->
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 36px; font-weight: 800; color: #E11D48; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px;">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 40px; font-weight: 800; color: #E11D48; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">
             ${catVal}
         </div>
 
         <!-- DESCRIPTION TEXT -->
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 30px; font-weight: 700; color: #E11D48; line-height: 1.35; max-width: 820px; margin-bottom: 100px; padding: 0 20px;">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 30px; font-weight: 700; color: #E11D48; line-height: 1.35; max-width: 900px; margin-bottom: 70px; padding: 0 20px;">
             ${descVal}
         </div>
         
-        <!-- BADGE "Tested by Brainrot Lab" -->
-        <div>
-            <span style="background-color: #FEE135; color: #000000; font-size: 28px; font-weight: 700; padding: 14px 38px; font-family: monospace; display: inline-block;">
-                Tested by Brainrot Lab
-            </span>
+        <!-- BADGE SVG "Tested by Brainrot Lab" (PERBAIKAN PERMANEN - TEKS DIJAMIN 100% DI TENGAH) -->
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <svg width="460" height="64" viewBox="0 0 460 64" xmlns="http://www.w3.org/2000/svg">
+                <!-- KOTAK KUNING -->
+                <rect width="460" height="64" fill="#FFE840" />
+                <!-- TEKS PERSISI PRESISI DI TENGAH -->
+                <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" fill="#000000" font-family="'Courier New', Courier, monospace" font-size="26" font-weight="800" letter-spacing="0.5">Tested by Brainrot Lab</text>
+            </svg>
         </div>
     `;
 
     document.body.appendChild(exportContainer);
 
     try {
-        // Render dengan html2canvas skala tinggi & kontras penuh
         const canvas = await html2canvas(exportContainer, {
             backgroundColor: "#D8EEFD",
             scale: 2,
@@ -374,6 +366,7 @@
         hideModal();
     }
 }
+
         shareBtn.addEventListener("click", showModal);
         confirmDownloadBtn.addEventListener("click", executeDownload);
         cancelDownloadBtn.addEventListener("click", hideModal);
