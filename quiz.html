@@ -162,7 +162,8 @@
 
         <section class="relative z-10 mt-3" aria-label="Quiz progress">
             <div class="mb-1 flex justify-between text-xs font-bold text-slate-500">
-                <span>Question <span id="currentQuestion">1</span> /10</span>
+                <span>Pertanyaan <span id="currentQuestion">1</span> dari 10</span>
+                <span id="scoreIndicator">Score 0</span>
             </div>
             <div class="h-2.5 overflow-hidden rounded-full bg-slate-200/80">
                 <div id="progressBar" class="h-full rounded-full bg-gradient-to-r from-sky-400 to-rose-400 transition-all duration-500 ease-out" style="width: 10%;"></div>
@@ -288,6 +289,7 @@
         const optionsContainer = document.getElementById("optionsContainer");
         const currentQuestion = document.getElementById("currentQuestion");
         const progressBar = document.getElementById("progressBar");
+        const scoreIndicator = document.getElementById("scoreIndicator");
         const optionLetters = ["A", "B", "C", "D"];
 
         let currentQuestionIndex = 0;
@@ -329,6 +331,7 @@
 
             isAnswering = true;
             totalScore += option.points;
+            scoreIndicator.textContent = `Score ${totalScore}`;
 
             Array.from(optionsContainer.children).forEach((button) => {
                 button.disabled = true;

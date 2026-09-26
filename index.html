@@ -185,6 +185,90 @@
     }
 }
     </style>
+
+<style id="phone-index-final-fix">
+/* Final phone-only correction for the home page.
+   Targets narrow portrait phones even when the browser reports a wide CSS viewport. */
+@media screen and (max-width: 699px), screen and (pointer: coarse) and (orientation: portrait) and (max-aspect-ratio: 0.7) {
+    html, body {
+        width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    body > main[class*="max-w-[430px]"] {
+        width: 100% !important;
+        max-width: 430px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Restore compact phone navigation. */
+    body > main[class*="max-w-[430px]"] > nav {
+        gap: 8px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        padding-top: 24px !important;
+    }
+    body > main[class*="max-w-[430px]"] > nav .nav-pill {
+        flex: 0 1 auto !important;
+        width: auto !important;
+        max-width: none !important;
+        padding: 6px 12px !important;
+        padding-left: 16px !important;
+        font-size: 11px !important;
+        line-height: 1.25 !important;
+        white-space: nowrap !important;
+    }
+
+    /* Keep the original compact title scale on phones. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] {
+        margin-top: 15rem !important;
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+    }
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] > div {
+        width: 90% !important;
+        max-width: 380px !important;
+    }
+
+    body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] {
+        width: 100% !important;
+        max-width: 360px !important;
+        margin-top: 4px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+    body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] p {
+        font-size: 12px !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Center START within the phone canvas, not the title artwork. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="Start quiz"] {
+        width: 100% !important;
+        max-width: 430px !important;
+        margin-top: 5rem !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        box-sizing: border-box !important;
+    }
+    body > main[class*="max-w-[430px]"] > section[aria-label="Start quiz"] > a {
+        width: 60% !important;
+        max-width: 200px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Phone-specific character sizes, preserving their original positions. */
+    body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] img[alt=""] {
+        max-width: none !important;
+    }
+}
+</style>
+
 </head>
 <body>
     <main class="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden border border-slate-200 bg-transparent shadow-[0_24px_60px_-24px_rgba(15,23,42,0.28)] mobile-canvas" aria-label="BRAINROT LAB mobile canvas">
