@@ -179,15 +179,19 @@
     </main>
 
     <script>
+        // Opsi A = 1 poin (Zero Rizz)
+        // Opsi B = 6 poin (Subtle Rizz)
+        // Opsi C = 10 poin (W Rizz)
+        // Opsi D = 0 poin (Brainrot Slang/Meme)
         const questions = [
             {
                 topic: "Respon Chat Teman",
                 text: "Teman kamu cuma bales DM cerita panjang kamu pake emoji \"💀\"",
                 options: [
                     { text: "\"Lho, kok cuma emoji tengkorak? Maksudnya lucu apa gimana?\"", points: 1 },
-                    { text: "\"Ketawa beneran atau cuma menghargai nih? 🤨\"", points: 7 },
+                    { text: "\"Ketawa beneran atau cuma menghargai nih? 🤨\"", points: 6 },
                     { text: "\"Real no cap, cerita gue emang segacor itu sih😎\"", points: 10 },
-                    { text: "\"Skibidi rizzler moment, gyatt level 10 gak tuh cerita gua?\"", points: 4 }
+                    { text: "\"Skibidi rizzler moment, gyatt level 10 gak tuh cerita gua?\"", points: 0 }
                 ]
             },
             {
@@ -195,9 +199,9 @@
                 text: "Temen lagi curhat sedih karena nilai ujiannya jelek",
                 options: [
                     { text: "\"So sorry to hear that, lain kali belajar lebih giat lagi.\"", points: 1 },
-                    { text: "\"Its okay, nanti kita belajar bareng biar bisa bantai di ujian berikutnya.\"", points: 7 },
+                    { text: "\"Its okay, nanti kita belajar bareng biar bisa bantai di ujian berikutnya.\"", points: 6 },
                     { text: "\"Senyum dulu dong. Nilai bisa di-remed, tapi manisnya kamu gak ada obatnya.\"", points: 10 },
-                    { text: "\"Fix skill issue sih. Kurangin mewing, banyakin belajar biar aura +1000!\"", points: 4 }
+                    { text: "\"Fix skill issue sih. Kurangin mewing, banyakin belajar biar aura +1000!\"", points: 0 }
                 ]
             },
             {
@@ -205,9 +209,9 @@
                 text: "Ada seseorang yang kasih kamu compliment “Bagus banget OOTD lo!”",
                 options: [
                     { text: "\"Masa sih? Ini cuma baju murah beli di online shop kok.\"", points: 1 },
-                    { text: "\"Thank you! Kamu juga outfitnya chic banget hari ini.\"", points: 7 },
+                    { text: "\"Thank you! Kamu juga outfitnya chic banget hari ini.\"", points: 6 },
                     { text: "\"Outfitnya sih biasa aja, tapi aura gue yang bikin bajunya keliatan mahal.\"", points: 10 },
-                    { text: "\"Auto Sigma Grindset gak sih? Aura gue langsung melambung tinggi!\"", points: 4 }
+                    { text: "\"Auto Sigma Grindset gak sih? Aura gue langsung melambung tinggi!\"", points: 0 }
                 ]
             },
             {
@@ -215,9 +219,9 @@
                 text: "Kamu mau ngajak temen kamu untuk ngopi bareng weekend ini",
                 options: [
                     { text: "\"Lo free ga hari Sabtu untuk minum kopi bareng gue?”", points: 1 },
-                    { text: "\"Weekend ini kosong gak? Nongki yuk, ada tempat hits baru.\"", points: 7 },
+                    { text: "\"Weekend ini kosong gak? Nongki yuk, ada tempat hits baru.\"", points: 6 },
                     { text: "\"List café udah siap, tinggal nunggu main character-nya nih. Sabtu kosong?\"", points: 10 },
-                    { text: "\"Sabtu ini mewing time di kafe yok, biar Rizz level kita max bareng!\"", points: 4 }
+                    { text: "\"Sabtu ini mewing time di kafe yok, biar Rizz level kita max bareng!\"", points: 0 }
                 ]
             },
             {
@@ -225,9 +229,9 @@
                 text: "Temen kamu nge-drop opini hot take yang aneh banget pas diskusi",
                 options: [
                     { text: "\"Gue kurang setuju sama pendapat lo karena gak masuk akal.\"", points: 1 },
-                    { text: "\"Valid sih poin lu, tapi menurut gue ada POV lain yang lebih dapet.\"", points: 7 },
+                    { text: "\"Valid sih poin lu, tapi menurut gue ada POV lain yang lebih dapet.\"", points: 6 },
                     { text: "\"Opini lu menarik, tapi jujur belum bisa ngalahin pesona argumen gue.\"", points: 10 },
-                    { text: "\"Bro really thought he cooked 💀 Blud think he is the ultimate Sigma!\"", points: 4 }
+                    { text: "\"Bro really thought he cooked 💀 Blud think he is the ultimate Sigma!\"", points: 0 }
                 ]
             },
             {
@@ -235,9 +239,9 @@
                 text: "Pacar kamu bales chat setelah 8 jam tanpa kabar",
                 options: [
                     { text: "\"Kenapa baru bales jam segini? Dari mana aja kamu?\"", points: 1 },
-                    { text: "\"Busy day ya? It's fine, take your time ajaa.\"", points: 7 },
+                    { text: "\"Busy day ya? It's fine, take your time ajaa.\"", points: 6 },
                     { text: "\"Definisi save the best for last ya? Balesnya lama banget, tapi tetep aja bikin senyum.\"", points: 10 },
-                    { text: "\"AFK 8 jam? Kena phantom tax atau nyasar di Ohio?\"", points: 4 }
+                    { text: "\"AFK 8 jam? Kena phantom tax atau nyasar di Ohio?\"", points: 0 }
                 ]
             },
             {
@@ -245,9 +249,9 @@
                 text: "Lagi jalan berdua tapi mendadak hening/awkward silence",
                 options: [
                     { text: "Permisi ke toilet karena bingung mau ngomong apa lagi.", points: 1 },
-                    { text: "\"Eh sorry ya, gue agak gak fokus bingung mau bahas apa lagi nih haha.\"", points: 7 },
+                    { text: "\"Eh sorry ya, gue agak gak fokus bingung mau bahas apa lagi nih haha.\"", points: 6 },
                     { text: "Tatap matanya, \"Gak apa-apa ga ada suara, yang penting moment-nya bareng kamu.\"", points: 10 },
-                    { text: "Langsung hit the griddy atau mogging pas di depan dia biar gak kaku.", points: 4 }
+                    { text: "Langsung hit the griddy atau mogging pas di depan dia biar gak kaku.", points: 0 }
                 ]
             },
             {
@@ -255,9 +259,9 @@
                 text: "Kamu lagi butuh bantuan temen buat ngejelasin materi sekolah",
                 options: [
                     { text: "\"Lo bisa bantu jelasin materi ini gak? Gue gak ngerti sama sekali.\"", points: 1 },
-                    { text: "\"Lo paham materi ini gak? Spill pemahaman lu dong kalo sempet.\"", points: 7 },
+                    { text: "\"Lo paham materi ini gak? Spill pemahaman lu dong kalo sempet.\"", points: 6 },
                     { text: "\"Gue butuh savior nih buat nyelametin nilai. Lu mau jadi pahlawan gue?\"", points: 10 },
-                    { text: "\"Help me please, otak gue udah kena brainrot parah gara-gara materi ini!\"", points: 4 }
+                    { text: "\"Help me please, otak gue udah kena brainrot parah gara-gara materi ini!\"", points: 0 }
                 ]
             },
             {
@@ -265,9 +269,9 @@
                 text: "Kamu menang lomba dan mau posting di media sosial",
                 options: [
                     { text: "\"Alhamdulillah/Puji syukur berhasil meraih juara 1 dalam kompetisi hari ini.\"", points: 1 },
-                    { text: "\"Secured the W! Big thanks buat semua yang udah support dari awal 🏆\"", points: 7 },
+                    { text: "\"Secured the W! Big thanks buat semua yang udah support dari awal 🏆\"", points: 6 },
                     { text: "\"Hard work + aura positif emang gak pernah gagal menghasilkan W.\"", points: 10 },
-                    { text: "\"Unspoken Rizz + Skibidi Grindset = Auto Juara 1 No Counter!\"", points: 4 }
+                    { text: "\"Unspoken Rizz + Skibidi Grindset = Auto Juara 1 No Counter!\"", points: 0 }
                 ]
             },
             {
@@ -275,9 +279,9 @@
                 text: "Kamu liat crush posting foto baru di Story IG",
                 options: [
                     { text: "Cuma like story IG nya aja terus berharap dia yang nge-chat duluan.", points: 1 },
-                    { text: "Reply story: \"Bagus banget fotonya, apa lagi orang yang ada di fotonya”", points: 7 },
+                    { text: "Reply story: \"Bagus banget fotonya, apa lagi orang yang ada di fotonya”", points: 6 },
                     { text: "Reply story: \"Story IG gue beruntung banget bisa nampilin visual se-gacor ini.\"", points: 10 },
-                    { text: "Reply story: \"Visual-nya gak ngotak woi! Aura +1000000, auto simping parah gue!\"", points: 4 }
+                    { text: "Reply story: \"Visual-nya gak ngotak woi! Aura +1000000, auto simping parah gue!\"", points: 0 }
                 ]
             }
         ];
@@ -292,6 +296,7 @@
 
         let currentQuestionIndex = 0;
         let totalScore = 0;
+        let optionDCounter = 0; // Menghitung berapa kali pengguna memilih opsi D
         let isAnswering = false;
 
         function renderQuestion() {
@@ -314,7 +319,7 @@
 
                 button.appendChild(letter);
                 button.appendChild(label);
-                button.addEventListener("click", () => chooseAnswer(option, button));
+                button.addEventListener("click", () => chooseAnswer(option, index, button));
                 optionsContainer.appendChild(button);
             });
 
@@ -322,14 +327,18 @@
             quizCard.classList.add("quiz-card-enter");
         }
 
-        function chooseAnswer(option, selectedButton) {
+        function chooseAnswer(option, optionIndex, selectedButton) {
             if (isAnswering) {
                 return;
             }
 
             isAnswering = true;
             totalScore += option.points;
-        
+
+            // Jika memilih Opsi D (indeks ke-3), tambahkan counter Opsi D
+            if (optionIndex === 3) {
+                optionDCounter += 1;
+            }
 
             Array.from(optionsContainer.children).forEach((button) => {
                 button.disabled = true;
@@ -339,12 +348,13 @@
             });
 
             const nextQuestionIndex = currentQuestionIndex + 1;
-            currentQuestion.textContent = nextQuestionIndex;
+            currentQuestion.textContent = Math.min(nextQuestionIndex, questions.length);
             progressBar.style.width = `${(nextQuestionIndex / questions.length) * 100}%`;
 
             if (currentQuestionIndex === questions.length - 1) {
                 window.setTimeout(() => {
-                    window.location.href = 'quiz-result.html?score=' + totalScore;
+                    // Mengirim total poin dan jumlah D yang dipilih ke halaman hasil
+                    window.location.href = `quiz-result.html?score=${totalScore}&optionD=${optionDCounter}`;
                 }, 550);
                 return;
             }

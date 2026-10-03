@@ -139,12 +139,12 @@
                 </h1>
             </header>
 
-            <!-- 2. MASCOT IMAGE (SANGAT BESAR: w-64/w-80) -->
+            <!-- 2. MASCOT IMAGE -->
             <div class="mb-4 sm:mb-6 result-pop">
                 <img src="image/rizz.png" alt="Rizz Mascot" class="w-64 h-64 sm:w-80 sm:h-80 object-contain mx-auto" />
             </div>
 
-            <!-- 3. SCORE PERCENTAGE (MEGA SIZE: text-7xl/text-8xl) & TEXT CONTAINER -->
+            <!-- 3. SCORE PERCENTAGE & TEXT CONTAINER -->
             <div class="w-full flex flex-col items-center gap-3 mb-4 sm:mb-6 result-pop">
                 <div id="scorePercentage" class="text-7xl sm:text-8xl font-black text-[#E11D48] tracking-widest leading-none" style="font-family: 'Press Start 2P', monospace;" aria-live="polite">
                     0%
@@ -208,9 +208,13 @@
     <div id="toast" class="pointer-events-none fixed left-1/2 bottom-8 z-50 -translate-x-1/2 translate-y-2 rounded-full bg-slate-900 px-4 py-2.5 text-xs font-bold text-white shadow-lg opacity-0 transition-all duration-300" role="status" aria-live="polite"></div>
 
     <script>
+        // 1. Ambil Parameter Skor dan Opsi D dari URL
         const params = new URLSearchParams(window.location.search);
         const rawScore = Number.parseInt(params.get("score") || "0", 10);
+        const rawOptionD = Number.parseInt(params.get("optionD") || "0", 10);
+
         const score = Number.isFinite(rawScore) ? Math.max(0, Math.min(100, rawScore)) : 0;
+        const optionDCounter = Number.isFinite(rawOptionD) ? Math.max(0, rawOptionD) : 0;
 
         const scorePercentage = document.getElementById("scorePercentage");
         const scoreCategory = document.getElementById("scoreCategory");
@@ -222,34 +226,41 @@
         const cancelDownloadBtn = document.getElementById("cancelDownloadBtn");
         const toast = document.getElementById("toast");
 
-        const categories = [
-            {
-                minimum: 81,
-                title: "W Rizz (Max Level)",
-                description: "You communicate with high charisma without trying too hard."
-            },
-            {
-                minimum: 51,
-                title: "Subtle Rizz",
-                description: "You keep it cool, balanced, and effortlessly relatable."
-            },
-            {
-                minimum: 31,
-                title: "Brainrot Overload",
-                description: "Your vocabulary is 90% internet culture. Take a breather, blud!"
-            },
-            {
-                minimum: 0,
-                title: "Zero Rizz",
-                description: "Too formal or playing it too safe. Time to upgrade your social game!"
+        // 2. Fungsi Logika Keputusan Hasil Akhir (Logic Decision Table)
+        function calculateResult(totalPoints, countD) {
+            // KONDISI UTAMA: Jika Opsi D dipilih 4 kali atau lebih -> BRAINROT OVERLOAD
+            if (countD >= 4) {
+                return {
+                    title: "Brainrot Overload",
+                    description: "Your vocabulary is 90% internet culture. Take a breather, blud!"
+                };
             }
-        ];
 
-        const category = categories.find((item) => score >= item.minimum) || categories[categories.length - 1];
+            // KONDISI JIKA OPSI D < 4 KALI (Berdasarkan Total Poin)
+            if (totalPoints >= 80) {
+                return {
+                    title: "W Rizz",
+                    description: "You communicate with high charisma without trying too hard."
+                };
+            } else if (totalPoints >= 35) {
+                return {
+                    title: "Subtle Rizz",
+                    description: "You keep it cool, balanced, and effortlessly relatable."
+                };
+            } else {
+                return {
+                    title: "Zero Rizz",
+                    description: "Too formal or playing it too safe. Time to upgrade your social game!"
+                };
+            }
+        }
+
+        // 3. Terapkan Hasil Diagnosis ke UI
+        const result = calculateResult(score, optionDCounter);
 
         scorePercentage.textContent = `${score}%`;
-        scoreCategory.textContent = category.title;
-        scoreDesc.textContent = category.description;
+        scoreCategory.textContent = result.title;
+        scoreDesc.textContent = result.description;
 
         function showToast(message) {
             toast.textContent = message;
@@ -272,100 +283,96 @@
             downloadModal.classList.remove("flex");
         }
 
-  async function executeDownload() {
-    if (typeof html2canvas !== "function") {
-        showToast("Fitur penyimpanan gambar belum tersedia.");
-        hideModal();
-        return;
-    }
+        // 4. Ekspor Gambar 9:16 dengan SVG Badge
+        async function executeDownload() {
+            if (typeof html2canvas !== "function") {
+                showToast("Fitur penyimpanan gambar belum tersedia.");
+                hideModal();
+                return;
+            }
 
-    confirmDownloadBtn.disabled = true;
-    cancelDownloadBtn.disabled = true;
-    confirmDownloadBtn.textContent = "downloading...";
+            confirmDownloadBtn.disabled = true;
+            cancelDownloadBtn.disabled = true;
+            confirmDownloadBtn.textContent = "downloading...";
 
-    // 1. Ambil data dari UI
-    const scoreVal = scorePercentage.textContent;
-    const catVal = scoreCategory.textContent;
-    const descVal = scoreDesc.textContent;
-    const mascotSrc = document.querySelector("#resultCard img").src;
+            const scoreVal = scorePercentage.textContent;
+            const catVal = scoreCategory.textContent;
+            const descVal = scoreDesc.textContent;
+            const mascotSrc = document.querySelector("#resultCard img").src;
 
-    // 2. Buat kanvas tersembunyi berukuran 9:16 (1080 x 1920px)
-    const exportContainer = document.createElement("div");
-    exportContainer.style.position = "fixed";
-    exportContainer.style.left = "-9999px";
-    exportContainer.style.top = "-9999px";
-    exportContainer.style.width = "1080px";
-    exportContainer.style.height = "1920px";
-    exportContainer.style.backgroundColor = "#D8EEFD";
-    exportContainer.style.display = "flex";
-    exportContainer.style.flexDirection = "column";
-    exportContainer.style.alignItems = "center";
-    exportContainer.style.justifyContent = "flex-start";
-    exportContainer.style.paddingTop = "140px";
-    exportContainer.style.boxSizing = "border-box";
-    exportContainer.style.textAlign = "center";
+            const exportContainer = document.createElement("div");
+            exportContainer.style.position = "fixed";
+            exportContainer.style.left = "-9999px";
+            exportContainer.style.top = "-9999px";
+            exportContainer.style.width = "1080px";
+            exportContainer.style.height = "1920px";
+            exportContainer.style.backgroundColor = "#D8EEFD";
+            exportContainer.style.display = "flex";
+            exportContainer.style.flexDirection = "column";
+            exportContainer.style.alignItems = "center";
+            exportContainer.style.justifyContent = "flex-start";
+            exportContainer.style.paddingTop = "140px";
+            exportContainer.style.boxSizing = "border-box";
+            exportContainer.style.textAlign = "center";
 
-    // 3. Susun elemen hasil download dengan BADGE SVG PRESISI KUNING
-    exportContainer.innerHTML = `
-        <!-- HEADER TITLE -->
-        <div style="font-family: 'Silkscreen', 'Press Start 2P', monospace; font-size: 46px; font-weight: 900; color: #0F172A; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 60px;">
-            MY RIZZ LEVEL IS...
-        </div>
-        
-        <!-- EMOJI MASCOT -->
-        <div style="margin-bottom: 60px;">
-            <img src="${mascotSrc}" style="width: 680px; height: 680px; object-fit: contain;" />
-        </div>
-        
-        <!-- SCORE PERCENTAGE -->
-        <div style="font-family: 'Press Start 2P', monospace; font-size: 210px; font-weight: 900; color: #E11D48; letter-spacing: 2px; margin-bottom: 30px; line-height: 1;">
-            ${scoreVal}
-        </div>
+            exportContainer.innerHTML = `
+                <!-- HEADER TITLE -->
+                <div style="font-family: 'Silkscreen', 'Press Start 2P', monospace; font-size: 46px; font-weight: 900; color: #0F172A; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 60px;">
+                    MY RIZZ LEVEL IS...
+                </div>
+                
+                <!-- EMOJI MASCOT -->
+                <div style="margin-bottom: 60px;">
+                    <img src="${mascotSrc}" style="width: 680px; height: 680px; object-fit: contain;" />
+                </div>
+                
+                <!-- SCORE PERCENTAGE -->
+                <div style="font-family: 'Press Start 2P', monospace; font-size: 210px; font-weight: 900; color: #E11D48; letter-spacing: 2px; margin-bottom: 30px; line-height: 1;">
+                    ${scoreVal}
+                </div>
 
-        <!-- CATEGORY TITLE -->
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 40px; font-weight: 800; color: #E11D48; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">
-            ${catVal}
-        </div>
+                <!-- CATEGORY TITLE -->
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 40px; font-weight: 800; color: #E11D48; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">
+                    ${catVal}
+                </div>
 
-        <!-- DESCRIPTION TEXT -->
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 30px; font-weight: 700; color: #E11D48; line-height: 1.35; max-width: 900px; margin-bottom: 70px; padding: 0 20px;">
-            ${descVal}
-        </div>
-        
-        <!-- BADGE SVG "Tested by Brainrot Lab" (PERBAIKAN PERMANEN - TEKS DIJAMIN 100% DI TENGAH) -->
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <svg width="460" height="64" viewBox="0 0 460 64" xmlns="http://www.w3.org/2000/svg">
-                <!-- KOTAK KUNING -->
-                <rect width="460" height="64" fill="#FFE840" />
-                <!-- TEKS PERSISI PRESISI DI TENGAH -->
-                <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" fill="#000000" font-family="'Courier New', Courier, monospace" font-size="26" font-weight="800" letter-spacing="0.5">Tested by Brainrot Lab</text>
-            </svg>
-        </div>
-    `;
+                <!-- DESCRIPTION TEXT -->
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 30px; font-weight: 700; color: #E11D48; line-height: 1.35; max-width: 900px; margin-bottom: 70px; padding: 0 20px;">
+                    ${descVal}
+                </div>
+                
+                <!-- BADGE SVG "Tested by Brainrot Lab" -->
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <svg width="460" height="64" viewBox="0 0 460 64" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="460" height="64" fill="#FFE840" />
+                        <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" fill="#000000" font-family="'Courier New', Courier, monospace" font-size="26" font-weight="800" letter-spacing="0.5">Tested by Brainrot Lab</text>
+                    </svg>
+                </div>
+            `;
 
-    document.body.appendChild(exportContainer);
+            document.body.appendChild(exportContainer);
 
-    try {
-        const canvas = await html2canvas(exportContainer, {
-            backgroundColor: "#D8EEFD",
-            scale: 2,
-            useCORS: true,
-            logging: false
-        });
+            try {
+                const canvas = await html2canvas(exportContainer, {
+                    backgroundColor: "#D8EEFD",
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                });
 
-        const link = document.createElement("a");
-        link.download = "Brainrot-Rizz-Result.png";
-        link.href = canvas.toDataURL("image/png", 1.0);
-        link.click();
+                const link = document.createElement("a");
+                link.download = "Brainrot-Rizz-Result.png";
+                link.href = canvas.toDataURL("image/png", 1.0);
+                link.click();
 
-        showToast("Image successfully downloaded. 🎉");
-    } catch (error) {
-        showToast("Failed to download image. try again later.");
-    } finally {
-        document.body.removeChild(exportContainer);
-        hideModal();
-    }
-}
+                showToast("Image successfully downloaded. 🎉");
+            } catch (error) {
+                showToast("Failed to download image. try again later.");
+            } finally {
+                document.body.removeChild(exportContainer);
+                hideModal();
+            }
+        }
 
         shareBtn.addEventListener("click", showModal);
         confirmDownloadBtn.addEventListener("click", executeDownload);
