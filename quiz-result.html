@@ -188,7 +188,7 @@
 
     </div>
 
-    <!-- POP-UP MODAL KONFIRMASI -->
+    <!-- POP-UP MODAL KONFIRMASI DOWNLOAD -->
     <div id="downloadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="w-full max-w-sm bg-white rounded-2xl shadow-2xl p-6 modal-card text-center">
             <h3 id="modalTitle" class="text-lg font-extrabold text-slate-800 mb-2">📸 Ready to share your quiz result?</h3>
@@ -204,6 +204,22 @@
         </div>
     </div>
 
+    <!-- POP-UP MODAL KONFIRMASI HOME -->
+    <div id="homeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 modal-overlay" role="dialog" aria-modal="true" aria-labelledby="homeModalTitle">
+        <div class="w-full max-w-sm bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-6 modal-card text-center border border-white/60">
+            <h3 id="homeModalTitle" class="text-lg font-extrabold text-slate-800 mb-2">Are you sure you want to go back?</h3>
+            <p class="text-sm text-slate-600 mb-6">Your test results will not be saved if you leave this page!</p>
+            <div class="flex flex-col gap-3">
+                <button id="cancelHomeBtn" class="w-full py-3 px-4 rounded-xl bg-slate-200 text-slate-700 font-extrabold text-sm shadow-sm hover:bg-slate-300 transition-colors active:scale-98 min-h-[48px]">
+                    cancel
+                </button>
+                <button id="confirmHomeBtn" class="w-full py-3 px-4 rounded-xl bg-rose-500 text-white font-extrabold text-sm shadow-sm hover:bg-rose-600 transition-colors active:scale-98 min-h-[48px]">
+                    Yes, return to home page
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- TOAST NOTIFICATION -->
     <div id="toast" class="pointer-events-none fixed left-1/2 bottom-8 z-50 -translate-x-1/2 translate-y-2 rounded-full bg-slate-900 px-4 py-2.5 text-xs font-bold text-white shadow-lg opacity-0 transition-all duration-300" role="status" aria-live="polite"></div>
 
@@ -213,7 +229,7 @@
         const rawScore = Number.parseInt(params.get("score") || "0", 10);
         const rawOptionD = Number.parseInt(params.get("optionD") || "0", 10);
 
-        const score = Number.isFinite(rawScore) ? Math.max(0, Math.min(100, rawScore)) : 0;
+        const score = Number.isFinite(rawScore) ? Math.max(0, Math.min(180, rawScore)) : 0;
         const optionDCounter = Number.isFinite(rawOptionD) ? Math.max(0, rawOptionD) : 0;
 
         const scorePercentage = document.getElementById("scorePercentage");
@@ -221,42 +237,43 @@
         const scoreDesc = document.getElementById("scoreDesc");
         const resultCard = document.getElementById("resultCard");
         const shareBtn = document.getElementById("shareBtn");
+        const homeBtn = document.getElementById("homeBtn");
         const downloadModal = document.getElementById("downloadModal");
         const confirmDownloadBtn = document.getElementById("confirmDownloadBtn");
         const cancelDownloadBtn = document.getElementById("cancelDownloadBtn");
+        const homeModal = document.getElementById("homeModal");
+        const cancelHomeBtn = document.getElementById("cancelHomeBtn");
+        const confirmHomeBtn = document.getElementById("confirmHomeBtn");
         const toast = document.getElementById("toast");
 
         // 2. Fungsi Logika Keputusan Hasil Akhir (Logic Decision Table)
-        function calculateResult(totalPoints, countD) {
-            // KONDISI UTAMA: Jika Opsi D dipilih 4 kali atau lebih -> BRAINROT OVERLOAD
-            if (countD >= 4) {
+        function calculateResult(totalPoints) {
+            if (totalPoints >= 101 && totalPoints <= 180) {
                 return {
                     title: "Brainrot Overload",
                     description: "Your vocabulary is 90% internet culture. Take a breather, blud!"
                 };
             }
-
-            // KONDISI JIKA OPSI D < 4 KALI (Berdasarkan Total Poin)
-            if (totalPoints >= 80) {
+            if (totalPoints >= 76 && totalPoints <= 100) {
                 return {
                     title: "W Rizz",
                     description: "You communicate with high charisma without trying too hard."
                 };
-            } else if (totalPoints >= 35) {
+            }
+            if (totalPoints >= 36 && totalPoints <= 75) {
                 return {
                     title: "Subtle Rizz",
                     description: "You keep it cool, balanced, and effortlessly relatable."
                 };
-            } else {
-                return {
-                    title: "Zero Rizz",
-                    description: "Too formal or playing it too safe. Time to upgrade your social game!"
-                };
             }
+            return {
+                title: "Zero Rizz",
+                description: "Too formal or playing it too safe. Time to upgrade your social game!"
+            };
         }
 
         // 3. Terapkan Hasil Diagnosis ke UI
-        const result = calculateResult(score, optionDCounter);
+        const result = calculateResult(score);
 
         scorePercentage.textContent = `${score}%`;
         scoreCategory.textContent = result.title;
@@ -270,7 +287,7 @@
             }, 2400);
         }
 
-        function showModal() {
+        function showDownloadModal() {
             downloadModal.classList.remove("hidden");
             downloadModal.classList.add("flex");
             confirmDownloadBtn.disabled = false;
@@ -278,16 +295,26 @@
             cancelDownloadBtn.disabled = false;
         }
 
-        function hideModal() {
+        function hideDownloadModal() {
             downloadModal.classList.add("hidden");
             downloadModal.classList.remove("flex");
+        }
+
+        function showHomeModal() {
+            homeModal.classList.remove("hidden");
+            homeModal.classList.add("flex");
+        }
+
+        function hideHomeModal() {
+            homeModal.classList.add("hidden");
+            homeModal.classList.remove("flex");
         }
 
         // 4. Ekspor Gambar 9:16 dengan SVG Badge
         async function executeDownload() {
             if (typeof html2canvas !== "function") {
                 showToast("Fitur penyimpanan gambar belum tersedia.");
-                hideModal();
+                hideDownloadModal();
                 return;
             }
 
@@ -370,17 +397,34 @@
                 showToast("Failed to download image. try again later.");
             } finally {
                 document.body.removeChild(exportContainer);
-                hideModal();
+                hideDownloadModal();
             }
         }
 
-        shareBtn.addEventListener("click", showModal);
+        shareBtn.addEventListener("click", showDownloadModal);
         confirmDownloadBtn.addEventListener("click", executeDownload);
-        cancelDownloadBtn.addEventListener("click", hideModal);
+        cancelDownloadBtn.addEventListener("click", hideDownloadModal);
 
         downloadModal.addEventListener("click", (e) => {
             if (e.target === downloadModal) {
-                hideModal();
+                hideDownloadModal();
+            }
+        });
+
+        homeBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            showHomeModal();
+        });
+
+        cancelHomeBtn.addEventListener("click", hideHomeModal);
+
+        confirmHomeBtn.addEventListener("click", () => {
+            window.location.href = "index.html";
+        });
+
+        homeModal.addEventListener("click", (e) => {
+            if (e.target === homeModal) {
+                hideHomeModal();
             }
         });
     </script>
