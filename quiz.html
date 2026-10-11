@@ -56,9 +56,6 @@
     </style>
 
     <style id="tablet-ipad-responsive-fix">
-/* Tablet / iPad layout fix
-   Only active on tablet-sized viewports. Existing mobile/desktop layout,
-   JavaScript, text, colors, assets and interactions are intentionally left alone. */
 @media screen and (min-width: 700px) and (max-width: 1280px) {
     html, body {
         width: 100%;
@@ -66,7 +63,6 @@
         overflow-x: hidden;
     }
 
-    /* Pages built around the 430px mobile canvas */
     body > main[class*="max-w-[430px]"] {
         width: 100% !important;
         max-width: none !important;
@@ -74,7 +70,6 @@
         margin-right: auto !important;
     }
 
-    /* Keep tablet content centered and readable instead of stretching edge-to-edge. */
     body > main[class*="max-w-[430px]"] > header,
     body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"],
     body > main[class*="max-w-[430px]"] > section[aria-label="Daftar istilah brainrot"],
@@ -87,14 +82,12 @@
         margin-right: auto !important;
     }
 
-    /* Keep the original padding feel while giving the tablet some breathing room. */
     body > main[class*="max-w-[430px]"] > header {
         box-sizing: border-box;
         padding-left: 24px !important;
         padding-right: 24px !important;
     }
 
-    /* Index / home page: the title artwork can use the extra tablet space. */
     body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] > div {
         width: 90% !important;
         max-width: 560px !important;
@@ -108,7 +101,6 @@
         max-width: 440px !important;
     }
 
-    /* Fact / dictionary / team cards stay centered and don't become extremely wide. */
     body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"] {
         max-width: 800px !important;
     }
@@ -126,7 +118,6 @@
         max-width: 720px !important;
     }
 
-    /* Tablet / iPad: make answer choices easier to tap and read without changing the JS-generated classes. */
     body > main[class*="max-w-[430px]"] .quiz-option {
         min-height: 58px !important;
         padding: 0.9rem 1rem !important;
@@ -136,13 +127,11 @@
         gap: 0.75rem !important;
     }
 
-    /* Result page uses max-w-sm on a wrapper rather than a 430px main. */
     body > div:first-of-type {
         width: 100% !important;
         max-width: 680px !important;
     }
 
-    /* Do not let the result screenshot card or modal pick up the wrapper width. */
     #resultCard {
         width: 100% !important;
     }
@@ -156,7 +145,7 @@
         <div class="pointer-events-none absolute bottom-16 left-5 h-28 w-28 rounded-full bg-amber-200/35 blur-xl" aria-hidden="true"></div>
 
         <header class="relative w-full flex justify-center items-center pt-2 pb-3">
-            <a href="index.html" class="absolute left-0 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-sm font-bold text-slate-700 shadow-sm backdrop-blur-md transition-all hover:bg-rose-500 hover:text-white z-10" aria-label="Back to home">&lt;</a>
+            <a href="index.html" class="absolute left-0 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-sm font-bold text-slate-700 shadow-sm backdrop-blur-md transition-all hover:bg-rose-500 hover:text-white z-10" aria-label="Back to home"><</a>
             <h1 class="text-2xl font-black text-sky-500 tracking-wide">Check Your Rizz!</h1>
         </header>
 
@@ -179,109 +168,105 @@
     </main>
 
     <script>
-        // Opsi A = 1 poin (Zero Rizz)
-        // Opsi B = 6 poin (Subtle Rizz)
-        // Opsi C = 10 poin (W Rizz)
-        // Opsi D = 0 poin (Brainrot Slang/Meme)
         const questions = [
             {
                 topic: "Respon Chat Teman",
                 text: "Teman kamu cuma bales DM cerita panjang kamu pake emoji \"💀\"",
                 options: [
-                    { text: "\"Lho, kok cuma emoji tengkorak? Maksudnya lucu apa gimana?\"", points: 1 },
-                    { text: "\"Ketawa beneran atau cuma menghargai nih? 🤨\"", points: 6 },
-                    { text: "\"Real no cap, cerita gue emang segacor itu sih😎\"", points: 10 },
-                    { text: "\"Skibidi rizzler moment, gyatt level 10 gak tuh cerita gua?\"", points: 18 }
+                    { text: "\"Lho, kok cuma emoji tengkorak? Maksudnya lucu apa gimana?\"", style: "A" },
+                    { text: "\"Ketawa beneran atau cuma menghargai nih? 🤨\"", style: "B" },
+                    { text: "\"Real no cap, cerita gue emang segacor itu sih😎\"", style: "C" },
+                    { text: "\"Skibidi rizzler moment, gyatt level 10 gak tuh cerita gua?\"", style: "D" }
                 ]
             },
             {
                 topic: "Situasi di Tongkrongan",
                 text: "Temen lagi curhat sedih karena nilai ujiannya jelek",
                 options: [
-                    { text: "\"So sorry to hear that, lain kali belajar lebih giat lagi.\"", points: 1 },
-                    { text: "\"Its okay, nanti kita belajar bareng biar bisa bantai di ujian berikutnya.\"", points: 6 },
-                    { text: "\"Senyum dulu dong. Nilai bisa di-remed, tapi manisnya kamu gak ada obatnya.\"", points: 10 },
-                    { text: "\"Fix skill issue sih. Kurangin mewing, banyakin belajar biar aura +1000!\"", points: 18 }
+                    { text: "\"So sorry to hear that, lain kali belajar lebih giat lagi.\"", style: "A" },
+                    { text: "\"Its okay, nanti kita belajar bareng biar bisa bantai di ujian berikutnya.\"", style: "B" },
+                    { text: "\"Senyum dulu dong. Nilai bisa di-remed, tapi manisnya kamu gak ada obatnya.\"", style: "C" },
+                    { text: "\"Fix skill issue sih. Kurangin mewing, banyakin belajar biar aura +1000!\"", style: "D" }
                 ]
             },
             {
                 topic: "Dinotice Orang Lain",
-                text: "Ada seseorang yang kasih kamu compliment “Bagus banget OOTD lo!”",
+                text: "Ada seseorang yang kasih kamu compliment \"Bagus banget OOTD lo!\"",
                 options: [
-                    { text: "\"Masa sih? Ini cuma baju murah beli di online shop kok.\"", points: 1 },
-                    { text: "\"Thank you! Kamu juga outfitnya chic banget hari ini.\"", points: 6 },
-                    { text: "\"Outfitnya sih biasa aja, tapi aura gue yang bikin bajunya keliatan mahal.\"", points: 10 },
-                    { text: "\"Auto Sigma Grindset gak sih? Aura gue langsung melambung tinggi!\"", points: 18 }
+                    { text: "\"Masa sih? Ini cuma baju murah beli di online shop kok.\"", style: "A" },
+                    { text: "\"Thank you! Kamu juga outfitnya chic banget hari ini.\"", style: "B" },
+                    { text: "\"Outfitnya sih biasa aja, tapi aura gue yang bikin bajunya keliatan mahal.\"", style: "C" },
+                    { text: "\"Auto Sigma Grindset gak sih? Aura gue langsung melambung tinggi!\"", style: "D" }
                 ]
             },
             {
                 topic: "Bikin Janji Jalan",
                 text: "Kamu mau ngajak temen kamu untuk ngopi bareng weekend ini",
                 options: [
-                    { text: "\"Lo free ga hari Sabtu untuk minum kopi bareng gue?”", points: 1 },
-                    { text: "\"Weekend ini kosong gak? Nongki yuk, ada tempat hits baru.\"", points: 6 },
-                    { text: "\"List café udah siap, tinggal nunggu main character-nya nih. Sabtu kosong?\"", points: 10 },
-                    { text: "\"Sabtu ini mewing time di kafe yok, biar Rizz level kita max bareng!\"", points: 18 }
+                    { text: "\"Lo free ga hari Sabtu untuk minum kopi bareng gue?\"", style: "A" },
+                    { text: "\"Weekend ini kosong gak? Nongki yuk, ada tempat hits baru.\"", style: "B" },
+                    { text: "\"List café udah siap, tinggal nunggu main character-nya nih. Sabtu kosong?\"", style: "C" },
+                    { text: "\"Sabtu ini mewing time di kafe yok, biar Rizz level kita max bareng!\"", style: "D" }
                 ]
             },
             {
                 topic: "Beda Pendapat",
                 text: "Temen kamu nge-drop opini hot take yang aneh banget pas diskusi",
                 options: [
-                    { text: "\"Gue kurang setuju sama pendapat lo karena gak masuk akal.\"", points: 1 },
-                    { text: "\"Valid sih poin lu, tapi menurut gue ada POV lain yang lebih dapet.\"", points: 6 },
-                    { text: "\"Opini lu menarik, tapi jujur belum bisa ngalahin pesona argumen gue.\"", points: 10 },
-                    { text: "\"Bro really thought he cooked 💀 Blud think he is the ultimate Sigma!\"", points: 18 }
+                    { text: "\"Gue kurang setuju sama pendapat lo karena gak masuk akal.\"", style: "A" },
+                    { text: "\"Valid sih poin lu, tapi menurut gue ada POV lain yang lebih dapet.\"", style: "B" },
+                    { text: "\"Opini lu menarik, tapi jujur belum bisa ngalahin pesona argumen gue.\"", style: "C" },
+                    { text: "\"Bro really thought he cooked 💀 Blud think he is the ultimate Sigma!\"", style: "D" }
                 ]
             },
             {
                 topic: "Respon Pesan Lambat",
                 text: "Pacar kamu bales chat setelah 8 jam tanpa kabar",
                 options: [
-                    { text: "\"Kenapa baru bales jam segini? Dari mana aja kamu?\"", points: 1 },
-                    { text: "\"Busy day ya? It's fine, take your time ajaa.\"", points: 6 },
-                    { text: "\"Definisi save the best for last ya? Balesnya lama banget, tapi tetep aja bikin senyum.\"", points: 10 },
-                    { text: "\"AFK 8 jam? Kena phantom tax atau nyasar di Ohio?\"", points: 18 }
+                    { text: "\"Kenapa baru bales jam segini? Dari mana aja kamu?\"", style: "A" },
+                    { text: "\"Busy day ya? It's fine, take your time ajaa.\"", style: "B" },
+                    { text: "\"Definisi save the best for last ya? Balesnya lama banget, tapi tetep aja bikin senyum.\"", style: "C" },
+                    { text: "\"AFK 8 jam? Kena phantom tax atau nyasar di Ohio?\"", style: "D" }
                 ]
             },
             {
                 topic: "Menghadapi Situasi Canggung",
                 text: "Lagi jalan berdua tapi mendadak hening/awkward silence",
                 options: [
-                    { text: "Permisi ke toilet karena bingung mau ngomong apa lagi.", points: 1 },
-                    { text: "\"Eh sorry ya, gue agak gak fokus bingung mau bahas apa lagi nih haha.\"", points: 6 },
-                    { text: "Tatap matanya, \"Gak apa-apa ga ada suara, yang penting moment-nya bareng kamu.\"", points: 10 },
-                    { text: "Langsung hit the griddy atau mogging pas di depan dia biar gak kaku.", points: 18 }
+                    { text: "Permisi ke toilet karena bingung mau ngomong apa lagi.", style: "A" },
+                    { text: "\"Eh sorry ya, gue agak gak fokus bingung mau bahas apa lagi nih haha.\"", style: "B" },
+                    { text: "Tatap matanya, \"Gak apa-apa ga ada suara, yang penting moment-nya bareng kamu.\"", style: "C" },
+                    { text: "Langsung hit the griddy atau mogging pas di depan dia biar gak kaku.", style: "D" }
                 ]
             },
             {
                 topic: "Minta Tolong",
                 text: "Kamu lagi butuh bantuan temen buat ngejelasin materi sekolah",
                 options: [
-                    { text: "\"Lo bisa bantu jelasin materi ini gak? Gue gak ngerti sama sekali.\"", points: 1 },
-                    { text: "\"Lo paham materi ini gak? Spill pemahaman lu dong kalo sempet.\"", points: 6 },
-                    { text: "\"Gue butuh savior nih buat nyelametin nilai. Lu mau jadi pahlawan gue?\"", points: 10 },
-                    { text: "\"Help me please, otak gue udah kena brainrot parah gara-gara materi ini!\"", points: 18 }
+                    { text: "\"Lo bisa bantu jelasin materi ini gak? Gue gak ngerti sama sekali.\"", style: "A" },
+                    { text: "\"Lo paham materi ini gak? Spill pemahaman lu dong kalo sempet.\"", style: "B" },
+                    { text: "\"Gue butuh savior nih buat nyelametin nilai. Lu mau jadi pahlawan gue?\"", style: "C" },
+                    { text: "\"Help me please, otak gue udah kena brainrot parah gara-gara materi ini!\"", style: "D" }
                 ]
             },
             {
                 topic: "Pamer Pencapaian",
                 text: "Kamu menang lomba dan mau posting di media sosial",
                 options: [
-                    { text: "\"Alhamdulillah/Puji syukur berhasil meraih juara 1 dalam kompetisi hari ini.\"", points: 1 },
-                    { text: "\"Secured the W! Big thanks buat semua yang udah support dari awal 🏆\"", points: 6 },
-                    { text: "\"Hard work + aura positif emang gak pernah gagal menghasilkan W.\"", points: 10 },
-                    { text: "\"Unspoken Rizz + Skibidi Grindset = Auto Juara 1 No Counter!\"", points: 18 }
+                    { text: "\"Alhamdulillah/Puji syukur berhasil meraih juara 1 dalam kompetisi hari ini.\"", style: "A" },
+                    { text: "\"Secured the W! Big thanks buat semua yang udah support dari awal 🏆\"", style: "B" },
+                    { text: "\"Hard work + aura positif emang gak pernah gagal menghasilkan W.\"", style: "C" },
+                    { text: "\"Unspoken Rizz + Skibidi Grindset = Auto Juara 1 No Counter!\"", style: "D" }
                 ]
             },
             {
                 topic: "Liat Foto atau Selfie Crush",
                 text: "Kamu liat crush posting foto baru di Story IG",
                 options: [
-                    { text: "Cuma like story IG nya aja terus berharap dia yang nge-chat duluan.", points: 1 },
-                    { text: "Reply story: \"Bagus banget fotonya, apa lagi orang yang ada di fotonya”", points: 6 },
-                    { text: "Reply story: \"Story IG gue beruntung banget bisa nampilin visual se-gacor ini.\"", points: 10 },
-                    { text: "Reply story: \"Visual-nya gak ngotak woi! Aura +1000000, auto simping parah gue!\"", points: 18 }
+                    { text: "Cuma like story IG nya aja terus berharap dia yang nge-chat duluan.", style: "A" },
+                    { text: "Reply story: \"Bagus banget fotonya, apa lagi orang yang ada di fotonya\"", style: "B" },
+                    { text: "Reply story: \"Story IG gue beruntung banget bisa nampilin visual se-gacor ini.\"", style: "C" },
+                    { text: "Reply story: \"Visual-nya gak ngotak woi! Aura +1000000, auto simping parah gue!\"", style: "D" }
                 ]
             }
         ];
@@ -295,8 +280,7 @@
         const optionLetters = ["A", "B", "C", "D"];
 
         let currentQuestionIndex = 0;
-        let totalScore = 0;
-        let optionDCounter = 0; // Menghitung berapa kali pengguna memilih opsi D
+        let userAnswers = []; // Array of styles: ["A", "B", "C", "D", ...]
         let isAnswering = false;
 
         function renderQuestion() {
@@ -319,7 +303,7 @@
 
                 button.appendChild(letter);
                 button.appendChild(label);
-                button.addEventListener("click", () => chooseAnswer(option, index, button));
+                button.addEventListener("click", () => chooseAnswer(option.style, index, button));
                 optionsContainer.appendChild(button);
             });
 
@@ -327,18 +311,11 @@
             quizCard.classList.add("quiz-card-enter");
         }
 
-        function chooseAnswer(option, optionIndex, selectedButton) {
-            if (isAnswering) {
-                return;
-            }
+        function chooseAnswer(style, optionIndex, selectedButton) {
+            if (isAnswering) return;
 
             isAnswering = true;
-            totalScore += option.points;
-
-            // Jika memilih Opsi D (indeks ke-3), tambahkan counter Opsi D
-            if (optionIndex === 3) {
-                optionDCounter += 1;
-            }
+            userAnswers.push(style);
 
             Array.from(optionsContainer.children).forEach((button) => {
                 button.disabled = true;
@@ -353,8 +330,12 @@
 
             if (currentQuestionIndex === questions.length - 1) {
                 window.setTimeout(() => {
-                    // Mengirim total poin dan jumlah D yang dipilih ke halaman hasil
-                    window.location.href = `quiz-result.html?score=${totalScore}&optionD=${optionDCounter}`;
+                    const resultData = calculateResult(userAnswers);
+                    const params = new URLSearchParams();
+                    params.set("style", resultData.dominantStyle);
+                    params.set("brainrot", resultData.brainrotIntensity);
+                    params.set("awareness", resultData.contextAwareness);
+                    window.location.href = `quiz-result.html?${params.toString()}`;
                 }, 550);
                 return;
             }
@@ -365,6 +346,29 @@
                 renderQuestion();
                 isAnswering = false;
             }, 180);
+        }
+
+        function calculateResult(answers) {
+            const counts = { A: 0, B: 0, C: 0, D: 0 };
+            answers.forEach(s => counts[s]++);
+
+            const maxCount = Math.max(counts.A, counts.B, counts.C, counts.D);
+            const maxStyles = Object.keys(counts).filter(k => counts[k] === maxCount);
+
+            let dominantStyle;
+            if (maxStyles.length === 1) {
+                dominantStyle = maxStyles[0];
+            } else {
+                if (maxStyles.includes("D")) dominantStyle = "D";
+                else if (maxStyles.includes("C")) dominantStyle = "C";
+                else if (maxStyles.includes("B")) dominantStyle = "B";
+                else dominantStyle = "A";
+            }
+
+            const brainrotIntensity = Math.round((counts.D / 10) * 100);
+            const contextAwareness = Math.round(((counts.B + counts.C) / 10) * 100);
+
+            return { dominantStyle, brainrotIntensity, contextAwareness, counts };
         }
 
         renderQuestion();

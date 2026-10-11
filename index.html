@@ -100,9 +100,6 @@
     </style>
 
     <style id="tablet-ipad-responsive-fix">
-/* Tablet / iPad layout fix
-   Only active on tablet-sized viewports. Existing mobile/desktop layout,
-   JavaScript, text, colors, assets and interactions are intentionally left alone. */
 @media screen and (min-width: 700px) and (max-width: 1280px) {
     html, body {
         width: 100%;
@@ -110,7 +107,6 @@
         overflow-x: hidden;
     }
 
-    /* Pages built around the 430px mobile canvas */
     body > main[class*="max-w-[430px]"] {
         width: 100% !important;
         max-width: none !important;
@@ -118,7 +114,6 @@
         margin-right: auto !important;
     }
 
-    /* Keep tablet content centered and readable instead of stretching edge-to-edge. */
     body > main[class*="max-w-[430px]"] > header,
     body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"],
     body > main[class*="max-w-[430px]"] > section[aria-label="Daftar istilah brainrot"],
@@ -131,14 +126,12 @@
         margin-right: auto !important;
     }
 
-    /* Keep the original padding feel while giving the tablet some breathing room. */
     body > main[class*="max-w-[430px]"] > header {
         box-sizing: border-box;
         padding-left: 24px !important;
         padding-right: 24px !important;
     }
 
-    /* Index / home page: the title artwork can use the extra tablet space. */
     body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] > div {
         width: 90% !important;
         max-width: 560px !important;
@@ -155,7 +148,6 @@
         margin-right: auto !important;
     }
 
-    /* Fact / dictionary / team cards stay centered and don't become extremely wide. */
     body > main[class*="max-w-[430px]"] > section[aria-label="Rizzearch Fact abstracts"] {
         max-width: 800px !important;
     }
@@ -173,13 +165,11 @@
         max-width: 720px !important;
     }
 
-    /* Result page uses max-w-sm on a wrapper rather than a 430px main. */
     body > div:first-of-type {
         width: 100% !important;
         max-width: 680px !important;
     }
 
-    /* Do not let the result screenshot card or modal pick up the wrapper width. */
     #resultCard {
         width: 100% !important;
     }
@@ -187,9 +177,6 @@
     </style>
 
 <style id="phone-index-final-fix">
-/* Universal mobile responsive correction for the home page.
-   Uses the actual viewport width instead of the old fixed 430px canvas.
-   No scripts, text, assets, or interactions are changed. */
 @media screen and (max-width: 699px) {
     html, body {
         width: 100%;
@@ -208,7 +195,6 @@
         overflow-x: hidden !important;
     }
 
-    /* Navigation scales with the phone instead of keeping tablet-sized pills. */
     body > main[class*="max-w-[430px]"] > nav {
         width: 100% !important;
         box-sizing: border-box !important;
@@ -230,11 +216,10 @@
         box-sizing: border-box !important;
     }
 
-    /* Title: width follows the real viewport, so it cannot spill off narrow phones. */
     body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] {
         width: 100% !important;
         box-sizing: border-box !important;
-        margin-top: clamp(9rem, 39vh, 15rem) !important;
+        margin-top: clamp(7rem, 32vh, 12rem) !important;
         padding-left: clamp(4px, 2vw, 10px) !important;
         padding-right: clamp(4px, 2vw, 10px) !important;
     }
@@ -252,7 +237,6 @@
         max-width: 100% !important;
     }
 
-    /* Decorative characters scale with the title instead of staying fixed. */
     body > main[class*="max-w-[430px]"] > section[aria-label="BRAINROT LAB title"] img[alt=""] {
         max-width: none !important;
     }
@@ -268,7 +252,6 @@
         top: clamp(-24px, -6vw, -14px) !important;
     }
 
-    /* Description stays inside the viewport on every phone width. */
     body > main[class*="max-w-[430px]"] > section[aria-label="Deskripsi Brainrot Lab"] {
         width: min(94vw, 360px) !important;
         max-width: min(94vw, 360px) !important;
@@ -293,11 +276,10 @@
         right: clamp(-4px, -2vw, -1px) !important;
     }
 
-    /* START is centered in the actual viewport and scales smoothly. */
     body > main[class*="max-w-[430px]"] > section[aria-label="Start quiz"] {
         width: 100% !important;
         max-width: none !important;
-        margin-top: clamp(3rem, 9vh, 5rem) !important;
+        margin-top: clamp(2rem, 6vh, 4rem) !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
         padding-left: 12px !important;
@@ -317,7 +299,6 @@
     }
 }
 
-/* Very narrow phones: give the title a little more breathing room. */
 @media screen and (max-width: 360px) {
     body > main[class*="max-w-[430px]"] > nav .nav-pill {
         padding-left: 3px !important;
@@ -336,7 +317,7 @@
 
 </head>
 <body>
-    <main class="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden border border-slate-200 bg-transparent shadow-[0_24px_60px_-24px_rgba(15,23,42,0.28)] mobile-canvas" aria-label="BRAINROT LAB mobile canvas">
+    <main class="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden border border-slate-200 bg-transparent shadow-[0_24px_60px_-24px_rgba(15,23,42,0.28)] mobile-canvas pb-12" aria-label="BRAINROT LAB mobile canvas">
         <div class="halftone-corner halftone-top-left" aria-hidden="true"></div>
         <div class="halftone-corner halftone-bottom-right" aria-hidden="true"></div>
 
@@ -346,7 +327,7 @@
             <a href="mini-dictionary.html" class="nav-pill rounded-full border border-white/60 bg-white/90 px-3 py-1.5 pl-4 text-center text-[11px] font-semibold tracking-wide text-slate-800 shadow-[0_4px_14px_0_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200">Mini Dictionary</a>
         </nav>
 
-        <section class="mt-60 flex w-full items-center justify-center px-1" aria-label="BRAINROT LAB title">
+        <section class="mt-48 flex w-full items-center justify-center px-1" aria-label="BRAINROT LAB title">
             <div class="relative mx-auto w-[90%] max-w-[380px]">
                 <img src="image/Title.png" alt="BRAINROT LAB: Check Your Rizz!" class="h-auto w-full object-contain drop-shadow-md transition-transform duration-300 ease-out hover:scale-[1.02]">
                 <img src="image/character 1.png" alt="" class="absolute -top-7 left-7 w-20 h-auto object-contain z-10 pointer-events-none" aria-hidden="true">
@@ -362,8 +343,18 @@
             <img src="image/character 2.png" alt="" class="absolute right-[-15px] top-1/2 -translate-y-1/2 -scale-x-100 w-10 sm:w-11 h-auto object-contain z-10 pointer-events-none" aria-hidden="true">
         </section>
 
-        <section class="mt-20 flex w-full justify-center px-4" aria-label="Start quiz">
+        <section class="mt-12 flex w-full justify-center px-4" aria-label="Start quiz">
             <a href="quiz.html" class="flex w-[60%] max-w-[200px] items-center justify-center rounded-full border-2 border-rose-100 bg-white py-3 text-xl font-black tracking-wider text-rose-600 shadow-[0_8px_20px_-4px_rgba(225,29,72,0.2)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-4px_rgba(225,29,72,0.25)] active:scale-95">START</a>
+        </section>
+
+      <!-- TEKS RISET DENGAN CARD TIPIS SEMI-TRANSPARAN & POSISI PAS -->
+        <section class="mt-24 mb-6 px-6 w-full flex justify-center z-10" aria-label="Research background">
+            <div class="w-full max-w-[340px] bg-white/40 backdrop-blur-md rounded-2xl p-4 border border-white/50 shadow-sm text-center">
+                <p class="text-[10px] uppercase font-bold tracking-widest text-slate-500 mb-1">Research Insight</p>
+                <p class="text-[11px] sm:text-[12px] font-medium text-slate-700 italic leading-relaxed">
+                    "Based on our study of internet slang and digital identity, test how your language adapts to different audiences and contexts."
+                </p>
+            </div>
         </section>
     </main>
 </body>
