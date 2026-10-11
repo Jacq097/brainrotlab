@@ -258,7 +258,7 @@
             retakeModal.classList.remove("flex");
         }
 
-        async function executeDownload() {
+    async function executeDownload() {
             if (typeof html2canvas !== "function") {
                 showToast("Fitur penyimpanan gambar belum tersedia.");
                 hideDownloadModal();
@@ -327,12 +327,20 @@
                     logging: false
                 });
 
-                const link = document.createElement("a");
-                link.download = "Brainrot-Rizz-Result.png";
-                link.href = canvas.toDataURL("image/png", 1.0);
-                link.click();
+                // Menggunakan Blob agar kompatibel penuh dengan Safari iOS
+                canvas.toBlob((blob) => {
+                    const blobUrl = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = blobUrl;
+                    link.download = "Brainrot-Rizz-Result.png";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(blobUrl);
 
-                showToast("Image successfully downloaded. 🎉");
+                    showToast("Image successfully downloaded. 🎉");
+                }, "image/png", 1.0);
+
             } catch (error) {
                 showToast("Failed to download image. Try again later.");
             } finally {
@@ -340,6 +348,7 @@
                 hideDownloadModal();
             }
         }
+        
 
         shareBtn.addEventListener("click", showDownloadModal);
         confirmDownloadBtn.addEventListener("click", executeDownload);
