@@ -145,7 +145,7 @@
         <div class="pointer-events-none absolute bottom-16 left-5 h-28 w-28 rounded-full bg-amber-200/35 blur-xl" aria-hidden="true"></div>
 
         <header class="relative w-full flex justify-center items-center pt-2 pb-3">
-            <a href="index.html" class="absolute left-0 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-sm font-bold text-slate-700 shadow-sm backdrop-blur-md transition-all hover:bg-rose-500 hover:text-white z-10" aria-label="Back to home"><</a>
+            <a href="/" class="absolute left-0 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-sm font-bold text-slate-700 shadow-sm backdrop-blur-md transition-all hover:bg-rose-500 hover:text-white z-10" aria-label="Back to home"><</a>
             <h1 class="text-2xl font-black text-sky-500 tracking-wide">Check Your Rizz!</h1>
         </header>
 
@@ -235,7 +235,7 @@
                 options: [
                     { text: "Permisi ke toilet karena bingung mau ngomong apa lagi.", style: "A" },
                     { text: "\"Eh sorry ya, gue agak gak fokus bingung mau bahas apa lagi nih haha.\"", style: "B" },
-                    { text: "\ Tatap matanya, dan bilang \"Gak apa-apa gak ada suara, yang penting momen-nya bareng kamu.\"", style: "C" },
+                    { text: "\Tatap matanya, dan bilang \"Gak apa-apa gak ada suara, yang penting momen-nya bareng kamu.\"", style: "C" },
                     { text: "Langsung hit the griddy atau mogging pas di depan dia biar gak kaku.", style: "D" }
                 ]
             },
@@ -280,10 +280,14 @@
         const optionLetters = ["A", "B", "C", "D"];
 
         let currentQuestionIndex = 0;
-        let userAnswers = []; // Array of styles: ["A", "B", "C", "D", ...]
+        let userAnswers = []; 
         let isAnswering = false;
 
         function renderQuestion() {
+            // Sinkronkan nomor pertanyaan dan progress bar di awal render
+            currentQuestion.textContent = currentQuestionIndex + 1;
+            progressBar.style.width = `${((currentQuestionIndex + 1) / questions.length) * 100}%`;
+
             const question = questions[currentQuestionIndex];
             topicBadge.textContent = question.topic;
             questionText.textContent = question.text;
@@ -325,8 +329,6 @@
             });
 
             const nextQuestionIndex = currentQuestionIndex + 1;
-            currentQuestion.textContent = Math.min(nextQuestionIndex, questions.length);
-            progressBar.style.width = `${(nextQuestionIndex / questions.length) * 100}%`;
 
             if (currentQuestionIndex === questions.length - 1) {
                 window.setTimeout(() => {
